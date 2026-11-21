@@ -1,0 +1,515 @@
+{
+ "_ayuda": "Citas del vídeo (Apéndice A de la especificación). t en segundos para enlazar a YouTube con &t={t}s. No caducan.",
+ "items": [
+  {
+   "t": 0,
+   "mmss": "00:00",
+   "afirmacion": "Nasdaq −5,3 % en una sesión",
+   "panel": "I02 (M1)"
+  },
+  {
+   "t": 5,
+   "mmss": "00:05",
+   "afirmacion": "Nasdaq −10 % o más en la semana",
+   "panel": "I02"
+  },
+  {
+   "t": 11,
+   "mmss": "00:11",
+   "afirmacion": "Casi −20 % desde máximos = mercado bajista técnico",
+   "panel": "I01"
+  },
+  {
+   "t": 24,
+   "mmss": "00:24",
+   "afirmacion": "NVDA −22 % en la semana, más de 1 billón $",
+   "panel": "I03"
+  },
+  {
+   "t": 35,
+   "mmss": "00:35",
+   "afirmacion": "NVDA casi −50 % desde máximos",
+   "panel": "c1, I03"
+  },
+  {
+   "t": 41,
+   "mmss": "00:41",
+   "afirmacion": "Se teme el pinchazo de la burbuja de la IA",
+   "panel": "M0, título"
+  },
+  {
+   "t": 53,
+   "mmss": "00:53",
+   "afirmacion": "Polymarket supera el 50 % en un día (2026, no 2027/2028)",
+   "panel": "I04, I05"
+  },
+  {
+   "t": 92,
+   "mmss": "01:32",
+   "afirmacion": "Funcionamiento del contrato: paga 1 $; 55 ¢ = 55 %",
+   "panel": "I04, ayuda"
+  },
+  {
+   "t": 138,
+   "mmss": "02:18",
+   "afirmacion": "Hace falta una parametrización sin ambigüedad",
+   "panel": "I06"
+  },
+  {
+   "t": 204,
+   "mmss": "03:24",
+   "afirmacion": "3 de 6 sucesos en 90 días antes del 31/12/2026",
+   "panel": "Sección 4, VentanaTimeline"
+  },
+  {
+   "t": 228,
+   "mmss": "03:48",
+   "afirmacion": "C1 NVDA −50 %",
+   "panel": "c1"
+  },
+  {
+   "t": 235,
+   "mmss": "03:55",
+   "afirmacion": "C2 SOXX −40 %",
+   "panel": "c2"
+  },
+  {
+   "t": 246,
+   "mmss": "04:06",
+   "afirmacion": "C3 TSMC/ASML/Broadcom/Arista/Supermicro −50 %",
+   "panel": "c3, I23"
+  },
+  {
+   "t": 262,
+   "mmss": "04:22",
+   "afirmacion": "C4 H100 ≤ 1 $/h durante 5 días (Silicon Data)",
+   "panel": "c4, I24"
+  },
+  {
+   "t": 276,
+   "mmss": "04:36",
+   "afirmacion": "C5 quiebra de OpenAI o Anthropic",
+   "panel": "c5, I27"
+  },
+  {
+   "t": 279,
+   "mmss": "04:39",
+   "afirmacion": "C6 adquisición de OpenAI",
+   "panel": "c6, I27"
+  },
+  {
+   "t": 297,
+   "mmss": "04:57",
+   "afirmacion": "Bloques financiero (1-3) y real (4-6)",
+   "panel": "M3, subíndices F y R"
+  },
+  {
+   "t": 321,
+   "mmss": "05:21",
+   "afirmacion": "Las financieras están cerca; las reales, lejos",
+   "panel": "I35, I36"
+  },
+  {
+   "t": 338,
+   "mmss": "05:38",
+   "afirmacion": "Nvidia diseña la mayoría de los chips; su cotización = apuesta por la inversión en IA",
+   "panel": "c1, ayuda"
+  },
+  {
+   "t": 355,
+   "mmss": "05:55",
+   "afirmacion": "ATH 239,2 $ el 6 de octubre; cierre 125,5 $ (−47 %)",
+   "panel": "c1"
+  },
+  {
+   "t": 376,
+   "mmss": "06:16",
+   "afirmacion": "Umbral (≈119,6 $); falta un 5 %",
+   "panel": "c1, distancia restante"
+  },
+  {
+   "t": 386,
+   "mmss": "06:26",
+   "afirmacion": "Caída tras unos resultados excelentes",
+   "panel": "I13"
+  },
+  {
+   "t": 396,
+   "mmss": "06:36",
+   "afirmacion": "Ingresos de 115.800 M$ (+103 %)",
+   "panel": "I13"
+  },
+  {
+   "t": 404,
+   "mmss": "06:44",
+   "afirmacion": "Previsión de 130.000 M$",
+   "panel": "I14"
+  },
+  {
+   "t": 407,
+   "mmss": "06:47",
+   "afirmacion": "El mercado duda de las ventas futuras",
+   "panel": "I36, evidencias"
+  },
+  {
+   "t": 425,
+   "mmss": "07:05",
+   "afirmacion": "Tres frentes: dirección, regulación y financiación",
+   "panel": "I17"
+  },
+  {
+   "t": 435,
+   "mmss": "07:15",
+   "afirmacion": "Salida de Jensen Huang (Megaspeed)",
+   "panel": "I17, dirección"
+  },
+  {
+   "t": 446,
+   "mmss": "07:26",
+   "afirmacion": "SEC: dos investigaciones (civil y contable); China y financiación",
+   "panel": "I17, regulación; I34"
+  },
+  {
+   "t": 485,
+   "mmss": "08:05",
+   "afirmacion": "Nvidia financia y avala a sus clientes",
+   "panel": "I15"
+  },
+  {
+   "t": 492,
+   "mmss": "08:12",
+   "afirmacion": "Garantías de 118.000 M$, de ellas 105.000 M$ en el campus de Ohio (OpenAI, 20 años)",
+   "panel": "I15, I16"
+  },
+  {
+   "t": 507,
+   "mmss": "08:27",
+   "afirmacion": "Si OpenAI no paga, Nvidia asume los alquileres",
+   "panel": "I16, ayuda"
+  },
+  {
+   "t": 517,
+   "mmss": "08:37",
+   "afirmacion": "Acuerdos circulares con neoclouds; «Nvidia como un banco»",
+   "panel": "I18"
+  },
+  {
+   "t": 542,
+   "mmss": "09:02",
+   "afirmacion": "La nueva CEO reevaluará las prácticas de financiación",
+   "panel": "I17, I33"
+  },
+  {
+   "t": 556,
+   "mmss": "09:16",
+   "afirmacion": "Sin financiación para los clientes → menos ventas",
+   "panel": "I37"
+  },
+  {
+   "t": 568,
+   "mmss": "09:28",
+   "afirmacion": "SOXX: 30 empresas, ejemplos, tope del 8 %",
+   "panel": "I22, c2, ayuda"
+  },
+  {
+   "t": 612,
+   "mmss": "10:12",
+   "afirmacion": "El SOXX distingue empresa frente a sector",
+   "panel": "I19"
+  },
+  {
+   "t": 622,
+   "mmss": "10:22",
+   "afirmacion": "Máximo de 218,3 $ el 22/06; umbral 131 $",
+   "panel": "c2"
+  },
+  {
+   "t": 636,
+   "mmss": "10:36",
+   "afirmacion": "Cierre de 123,3 $, −43,5 %: condición cumplida, la primera",
+   "panel": "c2, VentanaTimeline"
+  },
+  {
+   "t": 657,
+   "mmss": "10:57",
+   "afirmacion": "−35 % en 2 meses; solo superado en septiembre de 2001",
+   "panel": "I20"
+  },
+  {
+   "t": 680,
+   "mmss": "11:20",
+   "afirmacion": "ETF iShares MSCI Global Semiconductors (~260 empresas)",
+   "panel": "I21"
+  },
+  {
+   "t": 719,
+   "mmss": "11:59",
+   "afirmacion": "Mención de Freedom24 (patrocinio)",
+   "panel": "Excluida (D10)"
+  },
+  {
+   "t": 771,
+   "mmss": "12:51",
+   "afirmacion": "Función de cada proveedor",
+   "panel": "c3, ayuda; I23"
+  },
+  {
+   "t": 793,
+   "mmss": "13:13",
+   "afirmacion": "C3 lejos; Broadcom −37 %, ASML −36 %, TSMC −34 %, Arista −23 %",
+   "panel": "I23"
+  },
+  {
+   "t": 818,
+   "mmss": "13:38",
+   "afirmacion": "Broadcom 305 $; umbral 241 $",
+   "panel": "I23, fila destacada"
+  },
+  {
+   "t": 833,
+   "mmss": "13:53",
+   "afirmacion": "Balance: 1 cumplida, 1 cerca, 1 plausible",
+   "panel": "M3, resumen del bloque"
+  },
+  {
+   "t": 876,
+   "mmss": "14:36",
+   "afirmacion": "Las condiciones reales están muy lejos",
+   "panel": "R, I36"
+  },
+  {
+   "t": 892,
+   "mmss": "14:52",
+   "afirmacion": "H100 = el indicador más significativo; mide la economía real",
+   "panel": "c4, peso en R"
+  },
+  {
+   "t": 918,
+   "mmss": "15:18",
+   "afirmacion": "Con exceso de capacidad, sería el primer precio en hundirse",
+   "panel": "I24, ayuda; I40"
+  },
+  {
+   "t": 926,
+   "mmss": "15:26",
+   "afirmacion": "3,1 $/h hoy, 2,88 $ hace un mes, ~2 $ en diciembre de 2025: +50 % en 11 meses",
+   "panel": "I24"
+  },
+  {
+   "t": 953,
+   "mmss": "15:53",
+   "afirmacion": "La H100 ya no es puntera y debería abaratarse",
+   "panel": "I25"
+  },
+  {
+   "t": 975,
+   "mmss": "16:15",
+   "afirmacion": "La B200 cuesta casi 10 $/h",
+   "panel": "I26"
+  },
+  {
+   "t": 987,
+   "mmss": "16:27",
+   "afirmacion": "La demanda de cómputo crece más que la capacidad",
+   "panel": "I25, I36"
+  },
+  {
+   "t": 1007,
+   "mmss": "16:47",
+   "afirmacion": "Quiebra de los laboratorios poco verosímil",
+   "panel": "c5, I27"
+  },
+  {
+   "t": 1020,
+   "mmss": "17:00",
+   "afirmacion": "Los laboratorios alquilan casi toda la capacidad",
+   "panel": "I37"
+  },
+  {
+   "t": 1035,
+   "mmss": "17:15",
+   "afirmacion": "Anthropic: OPV a 83 $ y más de 81.000 M$ captados",
+   "panel": "I28, I29"
+  },
+  {
+   "t": 1042,
+   "mmss": "17:22",
+   "afirmacion": "OpenAI ha captado decenas de miles de millones en 2026",
+   "panel": "I29"
+  },
+  {
+   "t": 1054,
+   "mmss": "17:34",
+   "afirmacion": "Fragilidades en sus arquitecturas financieras",
+   "panel": "I29, nota; I37"
+  },
+  {
+   "t": 1070,
+   "mmss": "17:50",
+   "afirmacion": "Adquisición de OpenAI = venta de urgencia, improbable",
+   "panel": "c6"
+  },
+  {
+   "t": 1090,
+   "mmss": "18:10",
+   "afirmacion": "Resultado partido: chips en bolsa frente a alquiler sólido",
+   "panel": "I35"
+  },
+  {
+   "t": 1118,
+   "mmss": "18:38",
+   "afirmacion": "Escenario 1: pánico financiero sin reflejo real",
+   "panel": "I36 (E1)"
+  },
+  {
+   "t": 1128,
+   "mmss": "18:48",
+   "afirmacion": "Con sobrecapacidad: chips ociosos y alquiler a la baja",
+   "panel": "I24, I40"
+  },
+  {
+   "t": 1143,
+   "mmss": "19:03",
+   "afirmacion": "La Fed sube los tipos",
+   "panel": "I31"
+  },
+  {
+   "t": 1145,
+   "mmss": "19:05",
+   "afirmacion": "Bono a 10 años en torno al 5 %",
+   "panel": "I30"
+  },
+  {
+   "t": 1150,
+   "mmss": "19:10",
+   "afirmacion": "Nvidia se repliega como financiadora",
+   "panel": "I33"
+  },
+  {
+   "t": 1154,
+   "mmss": "19:14",
+   "afirmacion": "Se estrecha la ventana de OPV",
+   "panel": "I32"
+  },
+  {
+   "t": 1157,
+   "mmss": "19:17",
+   "afirmacion": "Victoria demócrata en las de mitad de mandato → temor a frenar los centros de datos",
+   "panel": "I34"
+  },
+  {
+   "t": 1165,
+   "mmss": "19:25",
+   "afirmacion": "Baja el valor presente de la inversión, no la utilidad de los chips",
+   "panel": "M10, texto E1"
+  },
+  {
+   "t": 1179,
+   "mmss": "19:39",
+   "afirmacion": "Una escasez futura revaloriza el cómputo presente",
+   "panel": "I25, M10"
+  },
+  {
+   "t": 1192,
+   "mmss": "19:52",
+   "afirmacion": "Como mucho, burbuja financiera de valoraciones",
+   "panel": "I36 (E1), M0"
+  },
+  {
+   "t": 1226,
+   "mmss": "20:26",
+   "afirmacion": "Los laboratorios siguen tirando; peores perspectivas para los proveedores de chips",
+   "panel": "I35"
+  },
+  {
+   "t": 1249,
+   "mmss": "20:49",
+   "afirmacion": "Escenario 2: la bolsa anticipa a la economía real",
+   "panel": "I36 (E2)"
+  },
+  {
+   "t": 1254,
+   "mmss": "20:54",
+   "afirmacion": "El alquiler refleja la escasez de hoy; la bolsa, la capacidad en camino",
+   "panel": "M10, texto E2"
+  },
+  {
+   "t": 1268,
+   "mmss": "21:08",
+   "afirmacion": "Puntocom: Nasdaq desde marzo de 2000; la fibra cae después",
+   "panel": "I38"
+  },
+  {
+   "t": 1279,
+   "mmss": "21:19",
+   "afirmacion": "Enlace LA–NY: 1,8 M$, 590.000 $ y «4.000 $»",
+   "panel": "I39"
+  },
+  {
+   "t": 1293,
+   "mmss": "21:33",
+   "afirmacion": "El ancho de banda submarino se triplicó en 2000 y en 2001",
+   "panel": "I39"
+  },
+  {
+   "t": 1303,
+   "mmss": "21:43",
+   "afirmacion": "La capacidad creció aún más; quiebra de Global Crossing",
+   "panel": "I39, I40"
+  },
+  {
+   "t": 1331,
+   "mmss": "22:11",
+   "afirmacion": "Lo financiero y lo real están interconectados",
+   "panel": "I37"
+  },
+  {
+   "t": 1352,
+   "mmss": "22:32",
+   "afirmacion": "Laboratorios con pérdidas dependen de financiación; si se cierra, cae el alquiler",
+   "panel": "I37, P"
+  },
+  {
+   "t": 1376,
+   "mmss": "22:56",
+   "afirmacion": "Lo financiero puede provocar el pinchazo real",
+   "panel": "I37, texto"
+  },
+  {
+   "t": 1384,
+   "mmss": "23:04",
+   "afirmacion": "Hoy los datos apuntan al escenario 1 (tipos, sobrerregulación)",
+   "panel": "I36, verificado con el fixture de la sección 6.3"
+  },
+  {
+   "t": 1414,
+   "mmss": "23:34",
+   "afirmacion": "No se descarta el escenario 2 antes de fin de año",
+   "panel": "M10, «evidencias a vigilar»"
+  },
+  {
+   "t": 1430,
+   "mmss": "23:50",
+   "afirmacion": "Lo que pincha es la valoración bursátil",
+   "panel": "M0, diagnóstico"
+  },
+  {
+   "t": 1437,
+   "mmss": "23:57",
+   "afirmacion": "Casi 3 billones $ evaporados en NVDA",
+   "panel": "I42"
+  },
+  {
+   "t": 1443,
+   "mmss": "24:03",
+   "afirmacion": "Peor racha de los semiconductores desde 2001",
+   "panel": "I20"
+  },
+  {
+   "t": 1448,
+   "mmss": "24:08",
+   "afirmacion": "La revolución de la IA, cada vez más innegable; ¿están justificados los precios y la estructura?",
+   "panel": "M12, texto de cierre"
+  }
+ ]
+}

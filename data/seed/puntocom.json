@@ -1,0 +1,14 @@
+{
+  "_ayuda": "Serie estática de la burbuja puntocom citada en el vídeo (21:19-21:43).",
+  "fibra": [
+    { "anio": 2000, "usd_anio": 1800000, "dudoso": false, "t": 1279 },
+    { "anio": 2001, "usd_anio": 590000, "dudoso": false, "t": 1279 },
+    { "anio": 2002, "usd_anio": 4000, "dudoso": true, "nota": "cifra del audio; podría ser 40.000 $", "t": 1287 }
+  ],
+  "demanda": [
+    { "anio": 2000, "factor": 3, "acumulado": 3, "t": 1293 },
+    { "anio": 2001, "factor": 3, "acumulado": 9, "t": 1293 }
+  ],
+  "texto": "La demanda se triplicó dos años seguidos, pero la capacidad creció aún más deprisa: Global Crossing quebró.",
+  "maximoNasdaq2000": "2000-03-10"
+}

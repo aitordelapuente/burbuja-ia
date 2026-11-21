@@ -1,0 +1,7 @@
+{
+  "_ayuda": "Estado de los laboratorios: normal | tension | evento. 'tension' o 'evento' activan el escenario 2. Edita la nota y la fecha al cambiar el estado.",
+  "items": [
+    { "lab": "OpenAI", "estado": "normal", "nota": "El vídeo considera la quiebra prácticamente imposible en las próximas 6 semanas.", "fecha": "2026-11-21", "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=1049s", "origen": "video", "verificado": false, "caduca_en": "2027-02-19" },
+    { "lab": "Anthropic", "estado": "normal", "nota": "El vídeo considera la quiebra prácticamente imposible en las próximas 6 semanas.", "fecha": "2026-11-21", "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=1049s", "origen": "video", "verificado": false, "caduca_en": "2027-02-19" }
+  ]
+}

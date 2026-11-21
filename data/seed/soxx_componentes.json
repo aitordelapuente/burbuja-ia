@@ -1,0 +1,15 @@
+{
+  "_ayuda": "Componentes del SOXX citados en el vídeo (09:28). Sin pesos: «peso máximo por empresa en torno al 8 % (según el vídeo)».",
+  "items": [
+    { "ticker": "NVDA", "nombre": "Nvidia", "papel": "diseño" },
+    { "ticker": "AMD", "nombre": "AMD", "papel": "diseño" },
+    { "ticker": "AVGO", "nombre": "Broadcom", "papel": "diseño" },
+    { "ticker": "MRVL", "nombre": "Marvell", "papel": "diseño" },
+    { "ticker": "INTC", "nombre": "Intel", "papel": "diseño y fabricación" },
+    { "ticker": "MU", "nombre": "Micron", "papel": "memoria (diseño y fabricación)" },
+    { "ticker": "TSM", "nombre": "TSMC", "papel": "fabricación" },
+    { "ticker": "AMAT", "nombre": "Applied Materials", "papel": "maquinaria" },
+    { "ticker": "LRCX", "nombre": "Lam Research", "papel": "maquinaria" },
+    { "ticker": "KLAC", "nombre": "KLA", "papel": "maquinaria" }
+  ]
+}

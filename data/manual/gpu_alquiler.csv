@@ -1,0 +1,6 @@
+fecha,gpu,indice,usd_hora,fuente,verificado
+2025-12-01,h100,SDH100RT,,video: «en apenas … $» (inaudible; coherente con unos 2 $),false
+2026-10-20,h100,SDH100RT,2.88,video (fecha aproximada: «hace un mes»),false
+2026-11-20,h100,SDH100RT,3.1,video,false
+2026-11-20,h100,SDH100RT,3.08,silicondata.com (página pública),true
+2026-11-20,b200,SDB200RT,10,video (≈10 $/h),false

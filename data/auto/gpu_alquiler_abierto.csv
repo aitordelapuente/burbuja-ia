@@ -1,0 +1,4 @@
+fecha,gpu,lectura,valor,fuentes_usadas,detalle_json
+2026-11-21,B200,neo,7.99,runpod+vast,"{""runpod_community"":5.98,""runpod_secure"":7.99,""vast_mediana"":8.75,""vast_ofertas"":14}"
+2026-11-21,H100,hs,9.585,azure+aws,"{""azure"":12.29,""aws"":6.88}"
+2026-11-21,H100,neo,2.69,runpod+vast,"{""runpod_community"":2.69,""runpod_secure"":4.39,""vast_mediana"":2.27,""vast_ofertas"":11}"

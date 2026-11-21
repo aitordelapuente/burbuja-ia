@@ -1,0 +1,5 @@
+.next
+node_modules
+tests/fixtures
+pnpm-lock.yaml
+ESPECIFICACION.md

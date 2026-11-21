@@ -1,0 +1,4 @@
+{
+  "_ayuda": "Eventos de c5 (quiebra de OpenAI o Anthropic) y c6 (adquisición de OpenAI). Solo cuentan con verificado: true y una fuente primaria o consenso de medios (sección 18.3.6). Formato: {id, fecha, tipo: quiebra|adquisicion_openai|otro, entidad: OpenAI|Anthropic, titulo, fuente_url, verificado}.",
+  "items": []
+}

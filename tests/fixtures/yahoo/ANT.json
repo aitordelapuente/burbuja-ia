@@ -1,0 +1,1 @@
+{"chart":{"result":[{"meta":{"currency":"USD","symbol":"ANT","exchangeTimezoneName":"America/New_York","instrumentType":"EQUITY","_fixture":"SINTÉTICO: solo para MOCK_DATA=1"},"timestamp":[1794859200,1794945600,1795032000,1795118400,1795204800],"indicators":{"quote":[{"close":[88.4,86.1,84.9,83.6,80.15]}]}}],"error":null}}

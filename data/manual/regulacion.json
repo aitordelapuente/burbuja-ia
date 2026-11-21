@@ -1,0 +1,7 @@
+{
+  "_ayuda": "Riesgo regulatorio y político. ambito: EEUU|UE|otro; efecto: freno_cpd|exportacion|investigacion|otro; gravedad 1-3 (decae a los 180 días).",
+  "items": [
+    { "fecha": "2026-11-21", "ambito": "EEUU", "titulo": "Victoria demócrata en las elecciones de mitad de mandato: temor a que se frene la construcción de centros de datos", "efecto": "freno_cpd", "gravedad": 2, "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=1157s", "origen": "video", "verificado": false },
+    { "fecha": "2026-11-21", "ambito": "EEUU", "titulo": "Posible sobrerregulación desde Washington", "efecto": "otro", "gravedad": 2, "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=1410s", "origen": "video", "verificado": false }
+  ]
+}

@@ -4,9 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run tests/unit",
+    "test:maintenance": "vitest run tests/maintenance",
+    "test:manual-data": "vitest run tests/unit/conectores.test.ts -t manual",
+    "test:contract": "vitest run -c vitest.contract.config.mts",
+    "e2e": "playwright test",
+    "fixtures": "tsx tests/fixtures/generar.ts",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@date-fns/tz": "^1.5.0",
@@ -17,6 +25,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "recharts": "^2.15.4",
+    "server-only": "^0.0.1",
     "zod": "^3.25.76"
   },
   "devDependencies": {
@@ -40,5 +49,10 @@
     "typescript": "^5",
     "vitest": "^5.1.1",
     "zod-to-json-schema": "^3.25.2"
-  }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.28.0"
 }

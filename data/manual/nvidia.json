@@ -1,0 +1,22 @@
+{
+  "_ayuda": "Datos de Nvidia que aún no están en XBRL. Siempre prevalece EDGAR si existe para el mismo periodo. Importes en millones de USD.",
+  "items": [
+    {
+      "trimestre": "FY2027Q3",
+      "fecha_dato": "2026-10-25",
+      "ingresos_musd": 115800,
+      "crec_interanual": 1.03,
+      "guidance_musd": 130000,
+      "garantias_musd": 118000,
+      "garantia_mayor_musd": 105000,
+      "descripcion_garantia_mayor": "Campus de centros de datos en Ohio alquilado a OpenAI durante 20 años",
+      "acuerdos_circulares_declarados": true,
+      "nota_acuerdos": "Nvidia vende infraestructura a neoclouds y se compromete a comprarles servicios de nube (vídeo 08:37).",
+      "fuente": "Resultados 17/11/2026 (vídeo 06:31)",
+      "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=391s",
+      "origen": "video",
+      "verificado": false,
+      "caduca_en": "2027-02-19"
+    }
+  ]
+}

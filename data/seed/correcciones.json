@@ -1,0 +1,65 @@
+{
+ "_ayuda": "Correcciones a los subtítulos automáticos (Apéndice B).",
+ "items": [
+  {
+   "mmss": "00:00",
+   "subtitulo": "«batacao»",
+   "correccion": "batacazo",
+   "base": "contexto"
+  },
+  {
+   "mmss": "06:16",
+   "subtitulo": "«por debajo de los $10»",
+   "correccion": "≈119,6 $ (50 % de 239,24)",
+   "base": "cálculo"
+  },
+  {
+   "mmss": "07:17",
+   "subtitulo": "«Jensen Wang»",
+   "correccion": "Jensen Huang",
+   "base": "nombre"
+  },
+  {
+   "mmss": "09:28",
+   "subtitulo": "«Soc», «Socks», «Sox»",
+   "correccion": "SOXX",
+   "base": "reglamento de Polymarket"
+  },
+  {
+   "mmss": "10:39",
+   "subtitulo": "«$13,3»",
+   "correccion": "123,3 $ (Yahoo: 123,40)",
+   "base": "cálculo y dato"
+  },
+  {
+   "mmss": "11:23",
+   "subtitulo": "«Eshaves»",
+   "correccion": "iShares",
+   "base": "descripción del vídeo"
+  },
+  {
+   "mmss": "13:23",
+   "subtitulo": "«[…] está un 37 %»",
+   "correccion": "Broadcom −37 %",
+   "base": "Yahoo: AVGO −36,8 %"
+  },
+  {
+   "mmss": "15:41",
+   "subtitulo": "«en diciembre de 2025 en apenas $.»",
+   "correccion": "cifra inaudible (≈2 $ según el «+50 % en 11 meses»)",
+   "base": "dudoso"
+  },
+  {
+   "mmss": "21:27",
+   "subtitulo": "«$4,000 en 2002»",
+   "correccion": "dudoso (¿40.000 $?)",
+   "base": "dudoso"
+  },
+  {
+   "mmss": "varios",
+   "subtitulo": "«Onehropic», «Antropic», «Open I», «Polyarket», «burbujadelas.com», «Lamp research», «Marvel»",
+   "correccion": "Anthropic, OpenAI, Polymarket, burbuja de las puntocom, Lam Research, Marvell",
+   "base": "—"
+  }
+ ]
+}

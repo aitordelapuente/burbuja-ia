@@ -1,0 +1,6 @@
+{
+  "_ayuda": "Salidas a bolsa relevantes de IA (complemento del proxy IPO). importe_musd en millones de USD.",
+  "items": [
+    { "empresa": "Anthropic", "ticker": "ANT", "fecha": "2026-11-21", "precio_opv": 83, "importe_musd": 81000, "estado": "completada", "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=1035s", "origen": "video", "verificado": false }
+  ]
+}

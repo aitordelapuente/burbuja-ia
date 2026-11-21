@@ -1,0 +1,4 @@
+{
+  "_ayuda": "Posibles sucesos de c5/c6 en investigación, escritos por J2 (scripts/research). Este fichero NUNCA activa condiciones ni cuenta para X/6 ni para el IRP: solo alimenta el aviso «Posible suceso en investigación». Cada item: {id, condicion: \"c5\"|\"c6\", entidad, tipo, titulo, fecha, fuentes: [{fuente_url, cita, cita_verificada, dominio, fecha_publicacion}], motivo, origen: \"J2\", modelo, fecha_alta}. Lo cambia J2 por PR con la etiqueta revision-humana; una persona puede editarlo a mano.",
+  "items": []
+}

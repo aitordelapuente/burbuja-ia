@@ -1,0 +1,8 @@
+{
+  "_ayuda": "Registro de los tres frentes de Nvidia. frente: direccion|regulacion|financiacion; gravedad 1-3. No inventes URLs de prensa: si no hay fuente, cita el vídeo con su segundo.",
+  "items": [
+    { "fecha": "2026-11-21", "frente": "direccion", "titulo": "Salida de Jensen Huang tras el escándalo «Megaspeed»", "detalle": "Hay una nueva consejera delegada.", "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=435s", "gravedad": 3, "origen": "video", "verificado": false },
+    { "fecha": "2026-11-21", "frente": "regulacion", "titulo": "La SEC abre dos investigaciones: una civil sobre la información a inversores y otra contable", "detalle": "No hay ninguna irregularidad probada. Temas de fondo: China y la financiación a clientes.", "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=446s", "gravedad": 2, "origen": "video", "verificado": false },
+    { "fecha": "2026-11-21", "frente": "financiacion", "titulo": "La nueva CEO anuncia que va a «reevaluar con rigor» las prácticas de financiación a clientes", "detalle": "Dejaría sin financiación a parte de sus clientes.", "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=542s", "gravedad": 2, "origen": "video", "verificado": false }
+  ]
+}

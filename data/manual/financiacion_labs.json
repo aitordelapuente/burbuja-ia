@@ -1,0 +1,7 @@
+{
+  "_ayuda": "Financiación captada por los laboratorios. tipo: OPV|ronda|deuda. importe_musd en millones de USD; null si la cifra no se conoce.",
+  "items": [
+    { "lab": "Anthropic", "fecha": "2026-11-21", "importe_musd": 81000, "tipo": "OPV", "nota": "Salida a bolsa a 83 $ por acción; más de 81.000 M$ captados (según el vídeo).", "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=1035s", "origen": "video", "verificado": false },
+    { "lab": "OpenAI", "fecha": "2026-11-21", "importe_musd": null, "tipo": "ronda", "nota": "«Decenas de miles de millones» captados en 2026 (según el vídeo, sin cifra exacta).", "fuente_url": "https://www.youtube.com/watch?v=JC5wHXu8f7I&t=1042s", "origen": "video", "verificado": false }
+  ]
+}
