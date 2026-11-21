@@ -63,7 +63,11 @@ export function inferirEsquema(obj: unknown, opciones: OpcionesInferencia = {}, 
     case 'object': {
       const entradas = Object.entries(obj as Record<string, unknown>).filter(([k]) => !opciones.ignorar?.(k));
       if (profundidad >= profundidadMax) return { type: 'object', properties: {} };
-      if (entradas.length >= umbralMapa) {
+      // Solo es un mapa si sus claves parecen datos (fechas, ids, «p5.48xlarge»), no nombres de campo: un objeto real
+      // de la API con muchas propiedades (Gamma, Vast) sigue siendo un objeto.
+      const pareceCampo = (k: string) => /^[A-Za-z_][A-Za-z0-9_]*$/.test(k) && !/^\d/.test(k);
+      const dinamicas = entradas.filter(([k]) => !pareceCampo(k)).length;
+      if (entradas.length >= umbralMapa && dinamicas / entradas.length >= 0.5) {
         let values: Esquema | null = null;
         for (const [, v] of entradas.slice(0, muestra)) values = unir(values, inferirEsquema(v, opciones, profundidad + 1));
         return { type: 'map', values };
@@ -136,10 +140,17 @@ export function diffEsquemas(esperado: Esquema | null, observado: Esquema | null
   const nuevas = [...b].filter((x) => !a.has(x)).sort();
   // Un campo que antes era «number» y ahora «number|null» no rompe; se considera ampliación.
   const clave = (s: string) => s.replace(/: [^@]+/, '');
-  const tipos = (s: string) => (/: ([^@]+?)(?: @|$)/.exec(s)?.[1] ?? '').split('|');
+  // «array<null|number>» → ['array:null', 'array:number'] para comparar los tipos de los elementos.
+  const tipos = (s: string) => {
+    const t = (/: ([^@]+?)(?: @|$)/.exec(s)?.[1] ?? '').trim();
+    const arr = /^array<(.*)>$/.exec(t);
+    return arr ? arr[1].split('|').map((x) => `array:${x}`) : t.split('|');
+  };
+  const contiene = (a: string[], b: string[]) => b.every((t) => a.includes(t));
+  // Tampoco rompe un estrechamiento («number|null» → «number»): todo valor nuevo cabe en el tipo esperado.
   const rompen = eliminadas.filter((x) => {
     const sustituta = nuevas.find((n) => clave(n) === clave(x));
-    return !sustituta || !tipos(x).every((t) => tipos(sustituta).includes(t));
+    return !sustituta || !(contiene(tipos(sustituta), tipos(x)) || contiene(tipos(x), tipos(sustituta)));
   });
   const texto = [...eliminadas.map((x) => `- ${x}`), ...nuevas.map((x) => `+ ${x}`)].join('\n');
   return { eliminadas, nuevas, roto: rompen.length > 0, texto };

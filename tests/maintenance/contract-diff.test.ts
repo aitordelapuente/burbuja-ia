@@ -77,4 +77,16 @@ describe('contract/diff', () => {
     const mapa = Object.fromEntries(Array.from({ length: 50 }, (_, i) => [`2026-01-${i}`, '2.1']));
     expect(inferirEsquema({ indexes: mapa })).toEqual({ type: 'object', properties: { indexes: { type: 'map', values: { type: 'string' } } } });
   });
+
+  it('un objeto real con muchos nombres de campo (Gamma, Vast) sigue siendo un objeto', () => {
+    const ev = Object.fromEntries(Array.from({ length: 60 }, (_, i) => [`campo${i}`, i]));
+    expect(inferirEsquema(ev).type).toBe('object');
+  });
+
+  it('estrechar un tipo («array<null|number>» → «array<number>») no rompe el contrato', () => {
+    const esperado = inferirEsquema({ close: [1, null] });
+    const d = diffEsquemas(esperado, inferirEsquema({ close: [1, 2] }));
+    expect(d.roto).toBe(false);
+    expect(diffEsquemas(esperado, inferirEsquema({ close: ['a'] })).roto).toBe(true);
+  });
 });

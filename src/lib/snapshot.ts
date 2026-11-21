@@ -56,6 +56,11 @@ const citaDe = (manual: DatosManuales, t: number, texto?: string) => {
 const fuenteYahoo = (s: string) => ({ nombre: FUENTES.yahoo.nombre, url: `${FUENTES.yahoo.url}${encodeURIComponent(s)}`, manual: false, verificado: true });
 const fuenteVideo = (t: number) => ({ nombre: 'Vídeo de Juan Ramón Rallo (dato manual)', url: urlVideo(t), manual: true, verificado: false });
 const iso = (d: string | null) => (d ? `${d}T21:00:00Z` : null);
+/** Un dato del día se sella al cierre (21:00 UTC); antes de esa hora se usa la hora actual para no fechar en el futuro. */
+const noFuturo = (d: string | null) => {
+  const ahora = new Date().toISOString();
+  return !d || d > ahora ? ahora : d;
+};
 
 function base(p: Partial<Indicador> & Pick<Indicador, 'id' | 'modulo' | 'nombre' | 'unidad' | 'ayuda' | 'fuente'>): Indicador {
   return { valor: null, semaforo: 'sin_dato', actualizadoEn: null, stale: false, ...p };
@@ -1079,7 +1084,7 @@ export async function buildSnapshot(): Promise<Snapshot> {
     { conector: 'polymarket', ok: pmOk && eventos.length > 0, error: pmError, fetchedAt: pmFetched, stale: pmStale },
     { conector: 'sec', ok: revR.ok && garR.ok && accR.ok, error: [revR, garR, accR].map((r) => (r.ok ? '' : r.error)).filter(Boolean)[0], fetchedAt: revR.fetchedAt, stale: revR.ok && !!revR.stale },
     { conector: 'silicondata', ok: sdH100.ok, error: sdH100.ok ? undefined : sdH100.error === 'sin_clave' ? 'sin_clave: se usa el CSV manual' : sdH100.error, fetchedAt: sdH100.fetchedAt, stale: sdH100.ok && !!sdH100.stale },
-    { conector: 'gpuAbierto', ok: !!iaaUlt, error: iaaUlt ? undefined : 'sin datos en data/auto/gpu_alquiler_abierto.csv', fetchedAt: iso(iaaUlt?.fecha ?? null) ?? new Date().toISOString(), stale: frIaa.stale },
+    { conector: 'gpuAbierto', ok: !!iaaUlt, error: iaaUlt ? undefined : 'sin datos en data/auto/gpu_alquiler_abierto.csv', fetchedAt: noFuturo(iso(iaaUlt?.fecha ?? null)), stale: frIaa.stale },
     { conector: 'manual', ok: true, fetchedAt: new Date().toISOString(), stale: false },
   ];
 
