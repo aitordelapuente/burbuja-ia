@@ -1,0 +1,23 @@
+{
+  "_ayuda": "Esquema observado de polymarket-clob (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/fixtures/polymarket/history-1111111111111111111111111111111111111111111111111111111111111111.json. Lo compara J4 (tests/contract).",
+  "fuente": "polymarket-clob",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "history": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "number"
+            },
+            "t": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "_ayuda": "Esquema observado de silicondata (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/fixtures/silicondata/h100.json. Lo compara J4 (tests/contract).",
+  "fuente": "silicondata",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "object",
+        "properties": {
+          "indexes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

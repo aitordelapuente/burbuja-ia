@@ -49,7 +49,7 @@ export function Gauge({
 }) {
   const v = valor === null || !Number.isFinite(valor) ? null : Math.max(0, Math.min(100, valor));
   const texto = textoValor ?? (v === null ? '—' : num(v, 0));
-  const aguja = v === null ? null : punto(v, 70);
+  const aguja = v === null ? null : punto(v, 62);
   const estado = textoEstado ?? META_SEMAFORO[semaforo].texto;
   return (
     <div className={clsx('flex flex-col items-center', className)}>
@@ -62,7 +62,7 @@ export function Gauge({
         aria-valuetext={v === null ? 'Sin dato' : `${texto}${unidad} · ${estado}`}
         className="w-full max-w-[260px]"
       >
-        <svg viewBox="0 0 200 120" className="block w-full" aria-hidden="true">
+        <svg viewBox="0 -8 200 148" className="block w-full" aria-hidden="true">
           <path d={arco(0, 100, 80)} fill="none" stroke="var(--superficie-2)" strokeWidth={18} />
           {bandas.map((b, i) => (
             <path
@@ -75,7 +75,7 @@ export function Gauge({
             />
           ))}
           {bandas.slice(1).map((b, i) => {
-            const p = punto(b.desde, 96);
+            const p = punto(b.desde, 97);
             return (
               <text key={i} x={p.x} y={p.y} fontSize={8} textAnchor="middle" fill="var(--texto-2)" className="cifra">
                 {b.desde}
@@ -88,7 +88,7 @@ export function Gauge({
               <circle cx={100} cy={100} r={5} fill="var(--texto)" />
             </>
           ) : null}
-          <text x={100} y={92} textAnchor="middle" fontSize={26} fontWeight={700} fill="var(--texto)" className="cifra">
+          <text x={100} y={134} textAnchor="middle" fontSize={26} fontWeight={700} fill="var(--texto)" className="cifra">
             {texto}
             {unidad ? <tspan fontSize={14}>{unidad}</tspan> : null}
           </text>

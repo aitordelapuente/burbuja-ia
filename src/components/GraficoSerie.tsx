@@ -39,7 +39,7 @@ const RANGOS = [
   { id: '5A', dias: 1826 },
   { id: 'Máx', dias: Infinity },
 ] as const;
-type IdRango = (typeof RANGOS)[number]['id'];
+export type IdRango = (typeof RANGOS)[number]['id'];
 
 const DIA = 86_400_000;
 
@@ -117,6 +117,7 @@ export function GraficoSerie({
   formato = 'num',
   rangoInicial = '1A',
   conRangos = true,
+  rangos = ['3M', '6M', '1A', '5A', 'Máx'],
   grande = false,
   dominioY,
   className,
@@ -130,6 +131,8 @@ export function GraficoSerie({
   formato?: TipoFormato;
   rangoInicial?: IdRango;
   conRangos?: boolean;
+  /** Rangos que se ofrecen (en la portada, solo hasta 1A: la serie completa está en la página de detalle). */
+  rangos?: IdRango[];
   grande?: boolean;
   dominioY?: [number | 'auto', number | 'auto'];
   className?: string;
@@ -188,7 +191,7 @@ export function GraficoSerie({
     <div className={clsx('w-full', className)}>
       {conRangos ? (
         <div role="group" aria-label={`Rango de ${titulo}`} className="no-imprimir mb-2 flex flex-wrap gap-1">
-          {RANGOS.map((r) => (
+          {RANGOS.filter((r) => rangos.includes(r.id)).map((r) => (
             <button
               key={r.id}
               type="button"
@@ -256,8 +259,8 @@ export function GraficoSerie({
                 type={serie.escalonada ? 'stepAfter' : 'linear'}
                 stroke={serie.color}
                 strokeWidth={serie.escalonada ? 1.25 : 1.75}
-                strokeDasharray={serie.discontinua || serie.escalonada ? '5 4' : undefined}
-                dot={false}
+                strokeDasharray={serie.discontinua ? '5 4' : undefined}
+                dot={serie.puntos.length <= 5 ? { r: 3, fill: serie.color } : false}
                 activeDot={{ r: 3 }}
                 connectNulls
                 isAnimationActive={false}
@@ -273,7 +276,7 @@ export function GraficoSerie({
               <span
                 aria-hidden="true"
                 className="inline-block w-4 border-t-2"
-                style={{ borderColor: s.color, borderStyle: s.discontinua || s.escalonada ? 'dashed' : 'solid' }}
+                style={{ borderColor: s.color, borderStyle: s.discontinua ? 'dashed' : 'solid' }}
               />
               {s.nombre}
             </li>

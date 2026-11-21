@@ -45,23 +45,23 @@ export function DiagramaRetroalimentacion({ nodos, className }: { nodos: NodoRet
           const m = META_SEMAFORO[nd.semaforo];
           return (
             <g key={i}>
-              <rect x={x(i)} y={20} width={anchoNodo} height={120} rx={10} fill="var(--superficie-2)" stroke={m.color} strokeWidth={2.5} />
+              <rect x={x(i)} y={20} width={anchoNodo} height={128} rx={10} fill="var(--superficie-2)" stroke={m.color} strokeWidth={2.5} />
               <text x={x(i) + 12} y={44} fontSize={15} fill={m.color}>
                 {m.icono}
               </text>
               <text x={x(i) + 30} y={44} fontSize={13} fontWeight={600} fill="var(--texto-2)">
                 {m.texto}
               </text>
-              {lineas(nd.titulo).map((l, j) => (
+              {lineas(nd.titulo, 19).map((l, j) => (
                 <text key={j} x={x(i) + 12} y={68 + j * 18} fontSize={14} fontWeight={600} fill="var(--texto)">
                   {l}
                 </text>
               ))}
               {nd.detalle
-                ? lineas(nd.detalle, 26)
-                    .slice(0, 1)
+                ? lineas(nd.detalle, 25)
+                    .slice(0, 2)
                     .map((l, j) => (
-                      <text key={j} x={x(i) + 12} y={128} fontSize={11} fill="var(--texto-2)">
+                      <text key={j} x={x(i) + 12} y={124 + j * 13} fontSize={11} fill="var(--texto-2)">
                         {l}
                       </text>
                     ))
@@ -74,7 +74,7 @@ export function DiagramaRetroalimentacion({ nodos, className }: { nodos: NodoRet
         })}
         {n > 1 ? (
           <path
-            d={`M${x(n - 1) + anchoNodo / 2},140 L${x(n - 1) + anchoNodo / 2},195 L${x(0) + anchoNodo / 2},195 L${x(0) + anchoNodo / 2},146`}
+            d={`M${x(n - 1) + anchoNodo / 2},148 L${x(n - 1) + anchoNodo / 2},195 L${x(0) + anchoNodo / 2},195 L${x(0) + anchoNodo / 2},154`}
             fill="none"
             stroke="var(--texto-2)"
             strokeWidth={2}

@@ -24,6 +24,6 @@ export async function GET(req: NextRequest) {
     reglasCambiadas: s.polymarket.reglasCambiadas,
     mercadoActivo: s.polymarket.principal !== null,
   };
-  if (detalle) cuerpo.datos = tablaSalud(s);
+  if (detalle) cuerpo.filas = tablaSalud(s);
   return NextResponse.json(cuerpo, { status: sano ? 200 : 503, headers: { 'Cache-Control': 'no-store' } });
 }

@@ -1,0 +1,71 @@
+# J4 · Contratos de API (sección 18.6). Llama en vivo a cada fuente y compara con los snapshots de esquema.
+# Ajuste de seguridad: no hay agente de autorreparación; solo issues `[contrato]` con el diff.
+# Los snapshots con campos nuevos van a un PR `revision-humana` (no se mergea solo).
+# Pausar: gh workflow disable contracts.yml
+name: contracts
+
+on:
+  schedule:
+    - cron: '0 5 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contracts
+  cancel-in-progress: false
+
+jobs:
+  contratos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Tests de contrato en vivo
+        id: contratos
+        continue-on-error: true
+        env:
+          CONTRACT_OUT: ${{ runner.temp }}/contract
+          SEC_USER_AGENT: ${{ vars.SEC_USER_AGENT }}
+          HTTP_USER_AGENT: ${{ vars.HTTP_USER_AGENT }}
+          SILICONDATA_API_KEY: ${{ secrets.SILICONDATA_API_KEY }}
+        run: pnpm vitest run --config vitest.contract.config.mts
+
+      - name: Abrir issues [contrato] y preparar snapshots con campos nuevos
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm tsx scripts/contract/report.ts --resultados="$RUNNER_TEMP/contract" --salida="$RUNNER_TEMP/bot"
+
+      - name: Leer la salida del script
+        id: salida
+        run: echo "hay=$(cat "$RUNNER_TEMP/bot/hay-cambios.txt")" >> "$GITHUB_OUTPUT"
+
+      - name: PR de snapshots (revisión humana)
+        if: steps.salida.outputs.hay == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ github.token }}
+          branch: bot/contratos
+          add-paths: |
+            tests/contract/snapshots/**
+          commit-message: 'test(J4): campos nuevos en los snapshots de esquema'
+          title: 'J4: campos nuevos en los snapshots de esquema'
+          body-path: ${{ runner.temp }}/bot/pr-body.md
+          labels: contrato,revision-humana
+          delete-branch: true

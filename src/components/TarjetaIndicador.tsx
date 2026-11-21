@@ -54,7 +54,10 @@ export function NotasIndicador({ notas, className }: { notas?: string[]; classNa
 export function ValorIndicador({ ind, className, grande = false }: { ind: Indicador; className?: string; grande?: boolean }) {
   const t = textoValor(ind);
   if (t === null) return <SinDato className={className} />;
-  return <p className={clsx('cifra font-semibold leading-tight', grande ? 'text-4xl' : 'text-2xl', className)}>{t}</p>;
+  const largo = t.length > 22;
+  return (
+    <p className={clsx('cifra font-semibold leading-tight', grande ? (largo ? 'text-2xl' : 'text-4xl') : largo ? 'text-base' : 'text-2xl', className)}>{t}</p>
+  );
 }
 
 /**

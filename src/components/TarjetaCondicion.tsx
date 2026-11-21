@@ -64,11 +64,11 @@ export function TarjetaCondicion({ c, className }: { c: Condicion; className?: s
       {c.estado === 'sin_dato' && valor === null ? (
         <SinDato />
       ) : (
-        <dl className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
+        <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs">
           <dt className="text-texto-2">Valor actual</dt>
           <dd className="cifra text-right text-sm font-semibold">{valor ?? '—'}</dd>
           <dt className="text-texto-2">Umbral</dt>
-          <dd className="cifra text-right">{textoUmbral(c)}</dd>
+          <dd className="text-right">{textoUmbral(c)}</dd>
           {esPrecio && c.id !== 'c4' ? (
             <>
               <dt className="text-texto-2">Distancia restante</dt>

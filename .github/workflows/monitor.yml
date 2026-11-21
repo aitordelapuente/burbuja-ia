@@ -1,0 +1,76 @@
+# J3 · Monitorización y alertas (sección 18.5). Abre, comenta y cierra issues `[monitor]`; nunca toca PR.
+# Pausar: gh workflow disable monitor.yml
+name: monitor
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: monitor-${{ github.event_name }}
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    if: github.event_name != 'deployment_status' || github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write # necesario para repository_dispatch (research-urgente)
+      issues: write
+      actions: read
+      pull-requests: read
+    env:
+      SITE_URL: ${{ vars.SITE_URL }}
+      HTTP_USER_AGENT: ${{ vars.HTTP_USER_AGENT }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Comprobar el despliegue (2 intentos en 15 min)
+        id: despliegue
+        if: github.event_name == 'deployment_status' && github.event.deployment.environment == 'Production'
+        run: pnpm tsx scripts/monitor/run.ts --modo=despliegue
+
+      - name: Rollback de Vercel si el despliegue ha roto la producción
+        if: steps.despliegue.outputs.rollback == 'true'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          GH_TOKEN: ${{ github.token }}
+          MOTIVO: ${{ steps.despliegue.outputs.motivo }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ]; then
+            npx --yes vercel@39.1.0 rollback --yes --token "$VERCEL_TOKEN"
+            cuerpo="Rollback de Vercel ejecutado tras un despliegue fallido: $MOTIVO. Run: $RUN_URL"
+          else
+            cuerpo="El despliegue ha roto la producción ($MOTIVO) y no hay VERCEL_TOKEN para el rollback. Haz rollback desde Vercel. Run: $RUN_URL"
+          fi
+          gh issue create --title "[monitor] despliegue: la producción falla tras el despliegue" --label monitor --body "$cuerpo"
+
+      - name: Comprobaciones y alertas
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          HEALTH_TOKEN: ${{ secrets.HEALTH_TOKEN }}
+          RESEARCH_CLAVE_PRESENTE: ${{ secrets.RESEARCH_API_KEY != '' || secrets.PERPLEXITY_API_KEY != '' }}
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ALERT_EMAIL_TO: ${{ vars.ALERT_EMAIL_TO }}
+          ALERT_EMAIL_FROM: ${{ vars.ALERT_EMAIL_FROM }}
+        run: pnpm tsx scripts/monitor/run.ts

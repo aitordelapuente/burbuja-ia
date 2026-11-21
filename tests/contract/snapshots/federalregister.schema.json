@@ -1,0 +1,82 @@
+{
+  "_ayuda": "Esquema observado de federalregister (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde un ejemplo mínimo (scripts/contract/fuentes.ts). Lo compara J4 (tests/contract).",
+  "fuente": "federalregister",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "count": {
+        "type": "number"
+      },
+      "description": {
+        "type": "string"
+      },
+      "results": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "abstract": {
+              "type": "string"
+            },
+            "agencies": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "json_url": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "type": "null"
+                  },
+                  "raw_name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "document_number": {
+              "type": "string"
+            },
+            "excerpts": {
+              "type": "string"
+            },
+            "html_url": {
+              "type": "string"
+            },
+            "pdf_url": {
+              "type": "string"
+            },
+            "public_inspection_pdf_url": {
+              "type": "string"
+            },
+            "publication_date": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "total_pages": {
+        "type": "number"
+      }
+    }
+  }
+}

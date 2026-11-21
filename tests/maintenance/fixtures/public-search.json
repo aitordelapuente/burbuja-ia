@@ -1,0 +1,30 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "events": [
+  {
+   "slug": "ai-bubble-burst-by",
+   "title": "AI bubble burst by...?",
+   "description": "This market will resolve to \"Yes\" if at least three of the following events occur within any 90-day window. [FIXTURE SINTÉTICO]",
+   "markets": []
+  },
+  {
+   "slug": "ai-bubble-burst-by-2029",
+   "title": "AI bubble burst by 2029?",
+   "description": "This market will resolve to \"Yes\" if at least three of the following events occur within any 90-day window. [FIXTURE SINTÉTICO]",
+   "markets": [
+    {
+     "slug": "x-2029",
+     "closed": false
+    }
+   ]
+  },
+  {
+   "slug": "nvidia-earnings",
+   "title": "Nvidia beats?",
+   "description": "Resolves Yes if Nvidia beats estimates.",
+   "markets": []
+  }
+ ],
+ "tags": [],
+ "profiles": []
+}

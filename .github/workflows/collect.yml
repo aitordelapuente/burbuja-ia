@@ -1,0 +1,76 @@
+# J1 · Recolector del índice abierto de alquiler de GPU (secciones 18.2 y 18.4).
+# Pausar: gh workflow disable collect.yml   ·   Reanudar: gh workflow enable collect.yml
+name: collect
+
+on:
+  schedule:
+    - cron: '15 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  recolectar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Recolectar RunPod, Vast.ai, Azure y AWS
+        env:
+          HTTP_USER_AGENT: ${{ vars.HTTP_USER_AGENT }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: pnpm tsx scripts/collect/gpu-abierto.ts --salida="$RUNNER_TEMP/bot"
+
+      - name: Leer la salida del script
+        id: salida
+        run: |
+          {
+            echo "hay=$(cat "$RUNNER_TEMP/bot/hay-cambios.txt")"
+            echo "etiquetas=$(paste -sd, "$RUNNER_TEMP/bot/labels.txt")"
+            echo "titulo=$(cat "$RUNNER_TEMP/bot/pr-title.txt")"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Crear o actualizar el PR
+        id: pr
+        if: steps.salida.outputs.hay == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.BOT_TOKEN || github.token }}
+          branch: bot/collect
+          add-paths: |
+            data/auto/**
+          commit-message: 'datos(J1): índice abierto de GPU'
+          title: ${{ steps.salida.outputs.titulo }}
+          body-path: ${{ runner.temp }}/bot/pr-body.md
+          labels: ${{ steps.salida.outputs.etiquetas }}
+          delete-branch: true
+
+      - name: Auto-merge nativo solo si es de bajo riesgo
+        if: steps.pr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
+          PR: ${{ steps.pr.outputs.pull-request-number }}
+          ETIQUETAS: ${{ steps.salida.outputs.etiquetas }}
+          SIN_BOT_TOKEN: ${{ secrets.BOT_TOKEN == '' }}
+          RAMA: bot/collect
+        run: bash .github/scripts/automerge.sh

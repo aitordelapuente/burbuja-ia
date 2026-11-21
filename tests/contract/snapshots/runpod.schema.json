@@ -1,0 +1,34 @@
+{
+  "_ayuda": "Esquema observado de runpod (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/maintenance/fixtures/runpod.json. Lo compara J4 (tests/contract).",
+  "fuente": "runpod",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "object",
+        "properties": {
+          "gpuTypes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "communityPrice": {
+                  "type": "number"
+                },
+                "displayName": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "securePrice": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

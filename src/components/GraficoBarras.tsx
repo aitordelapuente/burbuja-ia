@@ -107,7 +107,7 @@ export function GraficoBarras({
               width={56}
               stroke="var(--borde-fuerte)"
               scale={log ? 'log' : 'auto'}
-              domain={log ? ['auto', 'auto'] : [0, 'auto']}
+              domain={log ? [(min: number) => min / 2, (max: number) => max * 1.5] : [0, 'auto']}
               allowDataOverflow={false}
               tickFormatter={(v: number) => formatearEje(v, formato)}
             />
@@ -124,7 +124,7 @@ export function GraficoBarras({
               cursor={{ fill: 'var(--superficie-2)' }}
               content={<TooltipBarras formato={formato} formatoLinea={formatoLinea} nombre={nombre} nombreLinea={nombreLinea} />}
             />
-            <Bar yAxisId="izq" dataKey="valor" name={nombre} fill={color} isAnimationActive={false} radius={[3, 3, 0, 0]}>
+            <Bar yAxisId="izq" dataKey="valor" name={nombre} fill={color} isAnimationActive={false} radius={[3, 3, 0, 0]} maxBarSize={72}>
               {datos.map((f, i) => (
                 <Cell key={i} fill={f.color ?? color} fillOpacity={f.nota ? 0.55 : 1} />
               ))}

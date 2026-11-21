@@ -1,0 +1,75 @@
+{
+  "_ayuda": "Esquema observado de yahoo (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/fixtures/yahoo/NVDA.json. Lo compara J4 (tests/contract).",
+  "fuente": "yahoo",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "chart": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "null"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "indicators": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "close": {
+                            "type": "array",
+                            "items": {
+                              "type": "union",
+                              "anyOf": [
+                                {
+                                  "type": "null"
+                                },
+                                {
+                                  "type": "number"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "currency": {
+                      "type": "string"
+                    },
+                    "exchangeTimezoneName": {
+                      "type": "string"
+                    },
+                    "instrumentType": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "timestamp": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

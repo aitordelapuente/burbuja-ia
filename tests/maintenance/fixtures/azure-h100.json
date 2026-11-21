@@ -1,0 +1,32 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "BillingCurrency": "USD",
+ "Items": [
+  {
+   "currencyCode": "USD",
+   "retailPrice": 98.32,
+   "unitPrice": 98.32,
+   "armRegionName": "eastus",
+   "armSkuName": "Standard_ND96isr_H100_v5",
+   "skuName": "Standard_ND96isr_H100_v5",
+   "productName": "Virtual Machines NDsr H100 v5 Series",
+   "meterName": "ND96isr H100 v5",
+   "type": "Consumption",
+   "unitOfMeasure": "1 Hour"
+  },
+  {
+   "currencyCode": "USD",
+   "retailPrice": 18.17,
+   "unitPrice": 18.17,
+   "armRegionName": "eastus",
+   "armSkuName": "Standard_ND96isr_H100_v5",
+   "skuName": "Standard_ND96isr_H100_v5 Spot",
+   "productName": "Virtual Machines NDsr H100 v5 Series",
+   "meterName": "ND96isr H100 v5 Spot",
+   "type": "Consumption",
+   "unitOfMeasure": "1 Hour"
+  }
+ ],
+ "NextPageLink": null,
+ "Count": 2
+}

@@ -1,0 +1,52 @@
+{
+  "_ayuda": "Esquema observado de sec-companyconcept (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/fixtures/sec/Revenues.json. Lo compara J4 (tests/contract).",
+  "fuente": "sec-companyconcept",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "cik": {
+        "type": "number"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "taxonomy": {
+        "type": "string"
+      },
+      "units": {
+        "type": "object",
+        "properties": {
+          "USD": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "end": {
+                  "type": "string"
+                },
+                "filed": {
+                  "type": "string"
+                },
+                "form": {
+                  "type": "string"
+                },
+                "fp": {
+                  "type": "string"
+                },
+                "fy": {
+                  "type": "number"
+                },
+                "start": {
+                  "type": "string"
+                },
+                "val": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

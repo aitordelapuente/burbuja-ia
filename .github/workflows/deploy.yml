@@ -1,0 +1,48 @@
+# Despliegue a Vercel desde Actions. Solo hace falta si NO está la integración Git de Vercel (sección 12):
+# actívalo con la variable de repositorio DEPLOY_CON_ACTIONS=true y los secretos VERCEL_TOKEN, VERCEL_ORG_ID y VERCEL_PROJECT_ID.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: vars.DEPLOY_CON_ACTIONS == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Descargar la configuración de producción de Vercel
+        run: npx --yes vercel@39.1.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build
+        run: npx --yes vercel@39.1.0 build --prod --token="$VERCEL_TOKEN"
+
+      - name: Desplegar
+        run: npx --yes vercel@39.1.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"

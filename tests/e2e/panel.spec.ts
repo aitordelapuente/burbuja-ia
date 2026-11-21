@@ -73,8 +73,8 @@ test.describe('API', () => {
     const r = await request.get('/api/health?detalle=1', { headers: { Authorization: 'Bearer token-de-prueba' } });
     expect(r.status()).toBe(200);
     const j = await r.json();
-    expect(Array.isArray(j.datos)).toBe(true);
-    expect(j.datos[0]).toHaveProperty('umbralSinDatoH');
+    expect(Array.isArray(j.filas)).toBe(true);
+    expect(j.filas[0]).toHaveProperty('umbralSinDatoH');
   });
   test('/api/snapshot devuelve el snapshot', async ({ request }) => {
     const j = await (await request.get('/api/snapshot')).json();
@@ -105,7 +105,9 @@ test.describe('Accesibilidad (axe)', () => {
 });
 
 test.describe('Móvil', () => {
-  test.use({ ...devices['iPhone 13'], defaultBrowserType: 'chromium' });
+  const { defaultBrowserType: _d, ...iphone } = devices['iPhone 13'];
+  void _d;
+  test.use(iphone);
   test('sin scroll horizontal en iPhone 13', async ({ page }) => {
     await page.goto('/');
     const { sw, cw } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth }));

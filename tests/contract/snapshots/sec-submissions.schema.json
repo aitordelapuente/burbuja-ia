@@ -1,0 +1,61 @@
+{
+  "_ayuda": "Esquema observado de sec-submissions (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/maintenance/fixtures/sec-submissions-nvda.json. Lo compara J4 (tests/contract).",
+  "fuente": "sec-submissions",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "cik": {
+        "type": "string"
+      },
+      "filings": {
+        "type": "object",
+        "properties": {
+          "recent": {
+            "type": "object",
+            "properties": {
+              "accessionNumber": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "filingDate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "form": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "primaryDocument": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reportDate": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "name": {
+        "type": "string"
+      }
+    }
+  }
+}

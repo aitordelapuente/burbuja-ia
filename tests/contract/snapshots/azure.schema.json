@@ -1,0 +1,56 @@
+{
+  "_ayuda": "Esquema observado de azure (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/maintenance/fixtures/azure-h100.json. Lo compara J4 (tests/contract).",
+  "fuente": "azure",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "BillingCurrency": {
+        "type": "string"
+      },
+      "Count": {
+        "type": "number"
+      },
+      "Items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "armRegionName": {
+              "type": "string"
+            },
+            "armSkuName": {
+              "type": "string"
+            },
+            "currencyCode": {
+              "type": "string"
+            },
+            "meterName": {
+              "type": "string"
+            },
+            "productName": {
+              "type": "string"
+            },
+            "retailPrice": {
+              "type": "number"
+            },
+            "skuName": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "unitOfMeasure": {
+              "type": "string"
+            },
+            "unitPrice": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "NextPageLink": {
+        "type": "null"
+      }
+    }
+  }
+}

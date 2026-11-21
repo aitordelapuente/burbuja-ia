@@ -127,10 +127,10 @@ export const EventosSchema = archivo(
     tipo: z.enum(['quiebra', 'adquisicion_openai', 'otro']),
     entidad: z.enum(['OpenAI', 'Anthropic']),
     titulo: z.string(),
+    ...comunes,
     fuente_url: z.string().url(),
     verificado: z.boolean(),
     regla: z.enum(['A', 'B']).optional(),
-    ...{ ...comunes, fuente_url: z.string().url() },
   }),
 );
 export const LaboratoriosSchema = archivo(
@@ -138,6 +138,7 @@ export const LaboratoriosSchema = archivo(
 );
 export const NvidiaSchema = archivo(
   z.object({
+    ...comunes,
     trimestre: z.string(),
     fecha_dato: fecha.optional(),
     ingresos_musd: z.number().nullable(),
@@ -150,7 +151,6 @@ export const NvidiaSchema = archivo(
     nota_acuerdos: z.string().optional(),
     fuente: z.string(),
     verificado: z.boolean(),
-    ...comunes,
   }),
 );
 export const FrentesSchema = archivo(
@@ -159,10 +159,10 @@ export const FrentesSchema = archivo(
     frente: z.enum(['direccion', 'regulacion', 'financiacion']),
     titulo: z.string(),
     detalle: z.string(),
+    ...comunes,
     fuente_url: z.string().url(),
     gravedad: z.number().int().min(1).max(3),
     verificado: z.boolean(),
-    ...{ ...comunes, fuente_url: z.string().url() },
   }),
 );
 export const FinanciacionSchema = archivo(

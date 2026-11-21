@@ -1,0 +1,103 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "offers": [
+  {
+   "id": 0,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 52.0,
+   "rentable": true
+  },
+  {
+   "id": 1,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 56,
+   "rentable": true
+  },
+  {
+   "id": 2,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 57.6,
+   "rentable": true
+  },
+  {
+   "id": 3,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 60.0,
+   "rentable": true
+  },
+  {
+   "id": 4,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 64,
+   "rentable": true
+  },
+  {
+   "id": 5,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 66.4,
+   "rentable": true
+  },
+  {
+   "id": 6,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 69.6,
+   "rentable": true
+  },
+  {
+   "id": 7,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 70.4,
+   "rentable": true
+  },
+  {
+   "id": 8,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 72,
+   "rentable": true
+  },
+  {
+   "id": 9,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 73.6,
+   "rentable": true
+  },
+  {
+   "id": 10,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 76.0,
+   "rentable": true
+  },
+  {
+   "id": 11,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 80,
+   "rentable": true
+  },
+  {
+   "id": 12,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 84.0,
+   "rentable": true
+  },
+  {
+   "id": 13,
+   "gpu_name": "B200",
+   "num_gpus": 8,
+   "dph_total": 88,
+   "rentable": true
+  }
+ ]
+}

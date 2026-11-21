@@ -1,0 +1,37 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "data": {
+  "gpuTypes": [
+   {
+    "id": "NVIDIA H100 80GB HBM3",
+    "displayName": "H100 SXM",
+    "securePrice": 4.39,
+    "communityPrice": 2.69
+   },
+   {
+    "id": "NVIDIA H100 PCIe",
+    "displayName": "H100 PCIe",
+    "securePrice": 2.89,
+    "communityPrice": 1.99
+   },
+   {
+    "id": "NVIDIA H200",
+    "displayName": "H200 SXM",
+    "securePrice": 5.29,
+    "communityPrice": 3.59
+   },
+   {
+    "id": "NVIDIA B200",
+    "displayName": "B200",
+    "securePrice": 7.99,
+    "communityPrice": 5.98
+   },
+   {
+    "id": "NVIDIA B300",
+    "displayName": "B300",
+    "securePrice": 8.99,
+    "communityPrice": 6.94
+   }
+  ]
+ }
+}

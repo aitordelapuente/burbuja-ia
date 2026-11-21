@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":semanticCommits"],
+  "timezone": "Europe/Madrid",
+  "schedule": ["before 6am on monday"],
+  "packageRules": [
+    {
+      "description": "Parches: auto-merge nativo de GitHub cuando CI pasa",
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "description": "Menores de paquetes estables (no 0.x), tras 3 días publicados",
+      "matchUpdateTypes": ["minor"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Menores de paquetes 0.x: pueden romper, a revisión",
+      "matchUpdateTypes": ["minor"],
+      "matchCurrentVersion": "/^0/",
+      "automerge": false,
+      "labels": ["revision-humana"]
+    },
+    {
+      "description": "Pin, digest y mayores: nunca solos (política del equipo: solo patch/minor se mergean solos)",
+      "matchUpdateTypes": ["pin", "digest", "major"],
+      "automerge": false,
+      "labels": ["revision-humana"]
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": false,
+    "labels": ["revision-humana"],
+    "schedule": ["before 6am on the first day of the month"]
+  }
+}

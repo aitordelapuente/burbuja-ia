@@ -36,9 +36,11 @@ export function ContadorCondiciones({
                 href={`/condicion/${c.id}`}
                 className="cifra flex h-7 w-7 items-center justify-center rounded-full border-2 text-[11px] font-semibold"
                 style={{ borderColor: color, background: dentro ? color : 'transparent', color: dentro ? 'var(--sobre-color)' : 'var(--texto)' }}
-                aria-label={`${c.id.toUpperCase()}: ${c.nombre}. ${dentro ? 'En ventana' : 'Fuera de ventana'}`}
               >
                 {c.id.slice(1)}
+                <span className="sr-only">
+                  : condición {c.id.slice(1)}, {c.nombre}. {dentro ? 'En ventana' : 'Fuera de ventana'}
+                </span>
               </Link>
             </li>
           );

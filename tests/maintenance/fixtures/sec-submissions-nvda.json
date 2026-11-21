@@ -1,0 +1,39 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "cik": "1045810",
+ "name": "NVIDIA CORP",
+ "filings": {
+  "recent": {
+   "accessionNumber": [
+    "0001045810-26-000201",
+    "0001045810-26-000190",
+    "0001045810-26-000150"
+   ],
+   "filingDate": [
+    "2026-11-17",
+    "2026-08-27",
+    "2026-08-27"
+   ],
+   "reportDate": [
+    "2026-11-17",
+    "2026-07-26",
+    "2026-08-27"
+   ],
+   "form": [
+    "8-K",
+    "10-Q",
+    "8-K"
+   ],
+   "items": [
+    "2.02,9.01",
+    "",
+    "2.02,9.01"
+   ],
+   "primaryDocument": [
+    "nvda-20261117.htm",
+    "nvda-20260726.htm",
+    "nvda-20260827.htm"
+   ]
+  }
+ }
+}

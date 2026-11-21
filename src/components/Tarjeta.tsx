@@ -63,9 +63,10 @@ export function Modulo({
           <span className="cifra mr-2 text-sm font-medium text-texto-2">{codigo}</span>
           {titulo}
         </h2>
-        <a href={`#${id}`} className="no-imprimir inline-flex items-center gap-1 text-xs text-texto-2 hover:text-texto" aria-label={`Enlace directo a la sección ${titulo}`}>
+        <a href={`#${id}`} className="no-imprimir inline-flex items-center gap-1 text-xs text-texto-2 hover:text-texto">
           <Link2 aria-hidden="true" className="h-3.5 w-3.5" />
           <span className="cifra">#{id}</span>
+          <span className="sr-only"> (enlace directo a esta sección)</span>
         </a>
       </div>
       {subtitulo ? <div className="-mt-2 mb-4 max-w-3xl text-sm text-texto-2">{subtitulo}</div> : null}

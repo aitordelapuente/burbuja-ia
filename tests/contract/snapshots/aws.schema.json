@@ -1,0 +1,48 @@
+{
+  "_ayuda": "Esquema observado de aws (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/maintenance/fixtures/aws.json. Lo compara J4 (tests/contract).",
+  "fuente": "aws",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "manifest": {
+        "type": "object",
+        "properties": {
+          "currencyCode": {
+            "type": "string"
+          }
+        }
+      },
+      "regions": {
+        "type": "object",
+        "properties": {
+          "US East (N. Virginia)": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Instance Type": {
+                  "type": "string"
+                },
+                "Location": {
+                  "type": "string"
+                },
+                "Memory": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "string"
+                },
+                "rateCode": {
+                  "type": "string"
+                },
+                "vCPU": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

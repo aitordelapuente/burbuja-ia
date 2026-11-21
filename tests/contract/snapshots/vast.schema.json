@@ -1,0 +1,32 @@
+{
+  "_ayuda": "Esquema observado de vast (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/maintenance/fixtures/vast-h100.json. Lo compara J4 (tests/contract).",
+  "fuente": "vast",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "offers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dph_total": {
+              "type": "number"
+            },
+            "gpu_name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "number"
+            },
+            "num_gpus": {
+              "type": "number"
+            },
+            "rentable": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  }
+}

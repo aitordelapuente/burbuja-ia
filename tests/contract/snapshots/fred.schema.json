@@ -1,0 +1,15 @@
+{
+  "_ayuda": "Esquema observado de fred (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/fixtures/fred/DGS10.csv. Lo compara J4 (tests/contract).",
+  "fuente": "fred",
+  "esquema": {
+    "type": "object",
+    "properties": {
+      "DGS10": {
+        "type": "string"
+      },
+      "observation_date": {
+        "type": "string"
+      }
+    }
+  }
+}

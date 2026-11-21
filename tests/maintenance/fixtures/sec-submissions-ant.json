@@ -1,0 +1,33 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "cik": "2130357",
+ "name": "ANTHROPIC, PBC",
+ "filings": {
+  "recent": {
+   "accessionNumber": [
+    "0002130357-26-000045",
+    "0002130357-26-000040"
+   ],
+   "filingDate": [
+    "2026-11-19",
+    "2026-11-10"
+   ],
+   "reportDate": [
+    "2026-11-19",
+    "2026-11-10"
+   ],
+   "form": [
+    "8-K",
+    "8-K"
+   ],
+   "items": [
+    "1.03,9.01",
+    "7.01"
+   ],
+   "primaryDocument": [
+    "ant-20261119.htm",
+    "ant-20261110.htm"
+   ]
+  }
+ }
+}

@@ -1,0 +1,11 @@
+# Propietarios del código (sección 18.3.5). Propietario: @aitordelapuente
+# y activa «Require review from Code Owners» en la protección de main.
+# Por la decisión de seguridad del equipo, además de eventos.json (c5/c6) se protegen los ficheros que deciden
+# qué se mergea solo: workflows, script de auto-merge, clasificación de J2 y configuración de Renovate.
+/data/manual/eventos.json          @aitordelapuente
+/data/manual/laboratorios.json     @aitordelapuente
+/data/auto/candidatos_c56.json     @aitordelapuente
+/.github/                          @aitordelapuente
+/renovate.json                     @aitordelapuente
+/scripts/research/clasificar.ts    @aitordelapuente
+/scripts/collect/gpu-abierto.ts    @aitordelapuente

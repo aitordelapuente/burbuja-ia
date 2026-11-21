@@ -20,7 +20,7 @@ export function compactar(serie: Punto[], anios = 5): Punto[] {
   return [...semanal, ...recientes];
 }
 
-export function desde(serie: Punto[], fecha: string): Punto[] {
+export function desde<T extends { date: string }>(serie: T[], fecha: string): T[] {
   return serie.filter((p) => p.date >= fecha);
 }
 

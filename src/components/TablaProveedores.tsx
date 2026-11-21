@@ -25,7 +25,7 @@ export function TablaProveedores({ detalle, className }: { detalle: DetalleProve
   const cercana = filas.find((p) => !p.heredada);
   return (
     <div className={clsx('w-full', className)}>
-      <div className="overflow-x-auto rounded-md border border-borde">
+      <div className="overflow-x-auto rounded-md border border-borde" tabIndex={0} role="region" aria-label="Tabla desplazable">
         <table className="tabla min-w-[760px]">
           <caption className="sr-only">
             Proveedores de hardware: máximo, cierre, caída, precio umbral (−50 %), distancia restante y estado. Ordenados por proximidad al umbral.

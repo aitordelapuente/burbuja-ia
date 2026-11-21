@@ -1,0 +1,139 @@
+# J2 · Investigador de datos (sección 18.3). Determinista primero; LLM solo si hay clave.
+# Un PR por tarea en bot/research-{fecha}-{tarea}. Ningún paso aprueba ni mergea PR en revisión:
+# solo los PR `automerge` usan el auto-merge nativo de GitHub cuando CI pasa.
+# Pausar: gh workflow disable research.yml   ·   A mano: gh workflow run research.yml -f tarea=nvidia
+name: research
+
+on:
+  schedule:
+    - cron: '30 6 * * *' # diario: GPU oficial, SEC (NVDA y ANT), eventos c5/c6, frentes y regulación
+    - cron: '0 7 * * 1' # lunes: financiación de los laboratorios, OPV y descubrimiento de Polymarket
+  workflow_dispatch:
+    inputs:
+      tarea:
+        description: 'diarias, semanales o una tarea: gpu_oficial, nvidia, eventos, frentes_nvidia, regulacion, financiacion_labs, opv, polymarket'
+        required: false
+        default: diarias
+        type: string
+  repository_dispatch:
+    types: [research-urgente]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      tareas: ${{ steps.plan.outputs.tareas }}
+      fecha: ${{ steps.plan.outputs.fecha }}
+    steps:
+      - name: Elegir las tareas
+        id: plan
+        env:
+          EVENTO: ${{ github.event_name }}
+          CRON: ${{ github.event.schedule }}
+          TAREA: ${{ inputs.tarea }}
+        run: |
+          diarias='["gpu_oficial","nvidia","eventos","frentes_nvidia","regulacion"]'
+          semanales='["financiacion_labs","opv","polymarket"]'
+          case "$EVENTO" in
+            schedule)
+              if [ "$CRON" = "0 7 * * 1" ]; then lista="$semanales"; else lista="$diarias"; fi ;;
+            repository_dispatch)
+              lista='["gpu_oficial","eventos"]' ;;
+            *)
+              case "${TAREA:-diarias}" in
+                diarias) lista="$diarias" ;;
+                semanales) lista="$semanales" ;;
+                gpu_oficial|nvidia|eventos|frentes_nvidia|regulacion|financiacion_labs|opv|polymarket) lista="[\"$TAREA\"]" ;;
+                *) echo "Tarea no válida: $TAREA" >&2; exit 1 ;;
+              esac ;;
+          esac
+          {
+            echo "tareas=$lista"
+            echo "fecha=$(date -u +%F)"
+          } >> "$GITHUB_OUTPUT"
+
+  investigar:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: write
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        tarea: ${{ fromJSON(needs.plan.outputs.tareas) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Investigar (${{ matrix.tarea }})
+        env:
+          TAREA: ${{ matrix.tarea }}
+          GITHUB_TOKEN: ${{ github.token }}
+          SEC_USER_AGENT: ${{ vars.SEC_USER_AGENT }}
+          HTTP_USER_AGENT: ${{ vars.HTTP_USER_AGENT }}
+          RESEARCH_API_KEY: ${{ secrets.RESEARCH_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          RESEARCH_API_URL: ${{ vars.RESEARCH_API_URL }}
+          RESEARCH_MODEL: ${{ vars.RESEARCH_MODEL }}
+          RESEARCH_WEB_SEARCH: ${{ vars.RESEARCH_WEB_SEARCH }}
+          RESEARCH_MAX_USD_DIA: ${{ vars.RESEARCH_MAX_USD_DIA }}
+          SILICONDATA_API_KEY: ${{ secrets.SILICONDATA_API_KEY }}
+        run: pnpm tsx scripts/research/run.ts --tareas="$TAREA" --salida="$RUNNER_TEMP/bot"
+
+      - name: Leer la salida del script
+        id: salida
+        run: |
+          {
+            echo "hay=$(cat "$RUNNER_TEMP/bot/hay-cambios.txt")"
+            echo "etiquetas=$(paste -sd, "$RUNNER_TEMP/bot/labels.txt")"
+            echo "titulo=$(cat "$RUNNER_TEMP/bot/pr-title.txt")"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Crear o actualizar el PR
+        id: pr
+        if: steps.salida.outputs.hay == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.BOT_TOKEN || github.token }}
+          branch: bot/research-${{ needs.plan.outputs.fecha }}-${{ matrix.tarea }}
+          add-paths: |
+            data/manual/**
+            data/auto/**
+            logs/research/**
+          commit-message: 'datos(J2): ${{ matrix.tarea }}'
+          title: ${{ steps.salida.outputs.titulo }}
+          body-path: ${{ runner.temp }}/bot/pr-body.md
+          labels: ${{ steps.salida.outputs.etiquetas }}
+          delete-branch: true
+
+      - name: Auto-merge nativo solo si es de bajo riesgo
+        if: steps.pr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
+          PR: ${{ steps.pr.outputs.pull-request-number }}
+          ETIQUETAS: ${{ steps.salida.outputs.etiquetas }}
+          SIN_BOT_TOKEN: ${{ secrets.BOT_TOKEN == '' }}
+          RAMA: bot/research-${{ needs.plan.outputs.fecha }}-${{ matrix.tarea }}
+        run: bash .github/scripts/automerge.sh

@@ -2,7 +2,7 @@
 import 'server-only';
 import { createHash } from 'node:crypto';
 import {
-  CONDICIONES, ESCENARIOS, FUENTES, IRP as CFG_IRP, POLYMARKET, PROVEEDORES, SIMBOLOS, UMBRALES, VIDEO, env, urlVideo,
+  CONDICIONES, ESCENARIOS, FUENTES, POLYMARKET, PROVEEDORES, SIMBOLOS, UMBRALES, VIDEO, env, urlVideo,
 } from './config';
 import type {
   Condicion, ConnectorResult, DetalleProveedor, HorizontePolymarket, Indicador, Punto, SaludConector, Semaforo, Snapshot,
@@ -10,7 +10,7 @@ import type {
 import { yahoo, type SerieYahoo } from './connectors/yahoo';
 import { fred } from './connectors/fred';
 import { polymarketEvento, polymarketHistorial, type EventoPM } from './connectors/polymarket';
-import { secConcepto, trimestrales, type HechoSec } from './connectors/sec';
+import { secConcepto, trimestrales } from './connectors/sec';
 import { siliconData } from './connectors/silicondata';
 import { cargarManual, type DatosManuales } from './connectors/manual';
 import { drawdown, infoDrawdown, serieDrawdown, variacion, variacionDias, clamp } from './calc/drawdown';
@@ -21,6 +21,20 @@ import { diagnosticar } from './calc/escenario';
 import { fraseDelDia } from './calc/frase';
 import { peorRacha } from './calc/r42';
 import { addDays, businessDaysBetween, hoyEn } from './calc/fechas';
+import { preferirXbrl } from './calc/ciclo';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
+/** Eventos de Polymarket descubiertos por J2 (data/auto/polymarket_eventos.json) unidos a la configuración. */
+function eventosPolymarket(): string[] {
+  try {
+    const j = JSON.parse(readFileSync(path.join(process.cwd(), 'data/auto/polymarket_eventos.json'), 'utf8'));
+    const extra = Array.isArray(j.items) ? j.items.map((i: { slug?: unknown }) => String(i.slug ?? '')).filter(Boolean) : [];
+    return Array.from(new Set([...POLYMARKET.eventos, ...extra]));
+  } catch {
+    return [...POLYMARKET.eventos];
+  }
+}
 import { aPuntos, compactar, desde, valorEn } from './calc/series';
 import { fecha as fFecha, mesAnio, musd, num, pct, pp, usd, usdGrande } from './calc/formato';
 
@@ -83,7 +97,7 @@ export async function buildSnapshot(): Promise<Snapshot> {
   const [yRes, fredRes, pmRes, secRes, sdRes] = await Promise.all([
     Promise.allSettled(simbolos.map((s) => yahoo(s))),
     Promise.allSettled(['DGS10', 'DFEDTARU', 'DFEDTARL'].map((s) => fred(s))),
-    Promise.allSettled(POLYMARKET.eventos.map((e) => polymarketEvento(e))),
+    Promise.allSettled(eventosPolymarket().map((e) => polymarketEvento(e))),
     Promise.allSettled([
       secConcepto('us-gaap', 'Revenues'),
       secConcepto('us-gaap', 'GuaranteeObligationsMaximumExposure'),
@@ -107,9 +121,12 @@ export async function buildSnapshot(): Promise<Snapshot> {
     const r = Y.get(s);
     return !!(r && r.ok && r.stale);
   };
+  /** Fecha del dato (último cierre, 22:00 en Madrid ≈ 21:00 UTC), no la hora de la descarga. */
   const fechaY = (s: string) => {
     const r = Y.get(s);
-    return r && r.ok ? r.fetchedAt : null;
+    if (!r || !r.ok || !r.data.points.length) return null;
+    const ult = r.data.points.filter((p) => p.date <= hoy).pop();
+    return ult ? `${ult.date}T21:00:00Z` : null;
   };
 
   const F_ = (i: number) => okDe(fredRes[i]);
@@ -235,13 +252,11 @@ export async function buildSnapshot(): Promise<Snapshot> {
   // c3: cualquier proveedor −50 % (con cruce no heredado). Cuenta como una sola condición.
   const detalle: DetalleProveedor[] = [];
   let c3Stale = false;
-  let c3UltFecha: string | null = null;
   const c3Sucesos: string[] = [];
   for (const t of SIMBOLOS.proveedores) {
     const { info, suc, fr } = condPrecio(t, CONDICIONES.umbralProveedor);
     if (!info || !suc || fr.sinDato) continue;
     c3Stale = c3Stale || staleY(t) || fr.stale;
-    c3UltFecha = !c3UltFecha || info.fecha > c3UltFecha ? info.fecha : c3UltFecha;
     c3Sucesos.push(...suc.sucesos);
     detalle.push({
       ticker: t, nombre: PROVEEDORES[t].nombre, papel: PROVEEDORES[t].papel, ath: info.ath, athFecha: info.athFecha,
@@ -506,7 +521,10 @@ export async function buildSnapshot(): Promise<Snapshot> {
   // ---------------------------------------------------------------------------
   // M4 — Nvidia
   // ---------------------------------------------------------------------------
-  const nv = manual.nvidia.items[manual.nvidia.items.length - 1];
+  // El trimestre más reciente; si hay varias entradas del mismo trimestre (semilla del vídeo y J2), prevalece la verificada.
+  const nv = [...manual.nvidia.items].sort((a, b) =>
+    a.trimestre === b.trimestre ? Number(a.verificado) - Number(b.verificado) : a.trimestre.localeCompare(b.trimestre),
+  ).pop();
   const trims = revR.ok ? trimestrales(revR.data) : [];
   type Trim = { trimestre: string; end: string; ingresos: number; yoy: number | null; fuente: 'XBRL' | 'manual'; verificado: boolean };
   const lista: Trim[] = trims.map((t) => ({ trimestre: `FY${t.fy}${t.fp}`, end: t.end, ingresos: t.val / 1e6, yoy: null, fuente: 'XBRL', verificado: true }));
@@ -521,12 +539,22 @@ export async function buildSnapshot(): Promise<Snapshot> {
     const calc = ultT.ingresos / lista[lista.length - 5].ingresos - 1;
     return Math.abs(calc - nv.crec_interanual) > 0.01 ? calc : null;
   })();
+  // 18.7.3: si XBRL ya trae un trimestre que también está en los datos manuales/J2, manda XBRL y se avisa si difieren > 1 %.
+  const avisoXbrl = (() => {
+    for (const m of manual.nvidia.items) {
+      const x = trims.find((t) => `FY${t.fy}${t.fp === 'FY' ? 'Q4' : t.fp}` === m.trimestre);
+      if (!x || m.ingresos_musd === null || x.fy === null || x.fp === null) continue;
+      const r = preferirXbrl({ valor: x.val / 1e6, fy: x.fy, fp: x.fp }, { valor: m.ingresos_musd, trimestre: m.trimestre });
+      if (r.aviso) return r.aviso;
+    }
+    return null;
+  })();
   const semYoy = (y: number | null): Semaforo => (y === null ? 'sin_dato' : y >= UMBRALES.I13.verde ? 'verde' : y >= UMBRALES.I13.ambar ? 'ambar' : 'rojo');
   add(base({
     id: 'I13', modulo: 'M4', nombre: 'Ingresos trimestrales de Nvidia y crecimiento interanual', unidad: 'MUSD',
     ayuda: 'Los resultados son excelentes; el mercado no duda de lo vendido, sino de lo que venderá.',
     fuente: ultT?.fuente === 'manual'
-      ? { nombre: `Resultados del 17/11/2026 (${nv.fuente})`, url: nv.fuente_url ?? VIDEO.url, manual: true, verificado: nv.verificado }
+      ? { nombre: `Resultados del 17/11/2026 (${nv?.fuente})`, url: nv?.fuente_url ?? VIDEO.url, manual: true, verificado: nv?.verificado ?? false }
       : { nombre: FUENTES.sec.nombre, url: FUENTES.sec.url, manual: false, verificado: true },
     citaVideo: citaDe(manual, 396),
     valor: ultT?.ingresos ?? null, valorTexto: ultT ? `${musd(ultT.ingresos)} (${pct(ultT.yoy, 0, true)} interanual)` : undefined,
@@ -535,7 +563,7 @@ export async function buildSnapshot(): Promise<Snapshot> {
     umbrales: { verde: 'interanual ≥ 30 %', ambar: '0–30 %', rojo: '< 0 %', propuesto: true },
     actualizadoEn: revR.ok ? revR.fetchedAt : null, stale: revR.ok ? !!revR.stale : false,
     notas: [...(ultT?.fuente === 'manual' && !ultT.verificado ? ['Último trimestre: dato del vídeo, sin verificar (aún no está en XBRL).'] : []), ...(discrepanciaManual !== null ? [`El crecimiento calculado con XBRL (${pct(discrepanciaManual, 1)}) difiere del dato manual.`] : [])],
-    extra: { trimestres: lista.slice(-8) },
+    extra: { trimestres: lista.slice(-8), avisoXbrl },
   }));
   const guid = nv?.guidance_musd ?? null;
   const secuencial = guid !== null && ultT ? guid / ultT.ingresos - 1 : null;

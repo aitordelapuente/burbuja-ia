@@ -1,0 +1,20 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "directory": {
+  "name": "/Archives/edgar/data/1045810/000104581026000201",
+  "item": [
+   {
+    "name": "nvda-20261117.htm",
+    "type": "text.gif"
+   },
+   {
+    "name": "q3fy27cfocommentary.htm",
+    "type": "text.gif"
+   },
+   {
+    "name": "0001045810-26-000201-index.htm",
+    "type": "text.gif"
+   }
+  ]
+ }
+}

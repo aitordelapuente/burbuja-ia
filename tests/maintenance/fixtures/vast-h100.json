@@ -1,0 +1,82 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "offers": [
+  {
+   "id": 0,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 1,
+   "dph_total": 1.53,
+   "rentable": true
+  },
+  {
+   "id": 1,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 8,
+   "dph_total": 13.84,
+   "rentable": true
+  },
+  {
+   "id": 2,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 1,
+   "dph_total": 1.8,
+   "rentable": true
+  },
+  {
+   "id": 3,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 8,
+   "dph_total": 16.0,
+   "rentable": true
+  },
+  {
+   "id": 4,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 1,
+   "dph_total": 2.2,
+   "rentable": true
+  },
+  {
+   "id": 5,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 8,
+   "dph_total": 18.16,
+   "rentable": true
+  },
+  {
+   "id": 6,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 1,
+   "dph_total": 2.4,
+   "rentable": true
+  },
+  {
+   "id": 7,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 8,
+   "dph_total": 20.8,
+   "rentable": true
+  },
+  {
+   "id": 8,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 1,
+   "dph_total": 2.9,
+   "rentable": true
+  },
+  {
+   "id": 9,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 8,
+   "dph_total": 24.8,
+   "rentable": true
+  },
+  {
+   "id": 10,
+   "gpu_name": "H100 SXM",
+   "num_gpus": 1,
+   "dph_total": 3.5,
+   "rentable": true
+  }
+ ]
+}

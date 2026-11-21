@@ -17,10 +17,9 @@ function Lista() {
   );
 }
 
-/** Índice lateral (escritorio) o desplegable (móvil y tableta) con las anclas de la portada. */
+/** Índice lateral (escritorio, ≥ 1280 px) con las anclas de la portada. */
 export function IndiceLateral() {
   return (
-    <>
       <nav aria-label="Índice de secciones" className="no-imprimir sticky top-28 hidden max-h-[calc(100vh-8rem)] w-60 shrink-0 overflow-y-auto xl:block">
         <p className="mb-2 px-2 text-[11px] font-semibold uppercase tracking-wide text-texto-2">Índice</p>
         <Lista />
@@ -30,6 +29,12 @@ export function IndiceLateral() {
           </Link>
         </p>
       </nav>
+  );
+}
+
+/** Índice desplegable (móvil y tableta). */
+export function IndiceMovil() {
+  return (
       <details className="no-imprimir mb-2 rounded-lg border border-borde bg-superficie xl:hidden">
         <summary className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm font-medium">
           <List aria-hidden="true" className="h-4 w-4" />
@@ -39,6 +44,5 @@ export function IndiceLateral() {
           <Lista />
         </nav>
       </details>
-    </>
   );
 }

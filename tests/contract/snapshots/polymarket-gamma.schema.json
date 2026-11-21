@@ -1,0 +1,56 @@
+{
+  "_ayuda": "Esquema observado de polymarket-gamma (claves y tipos, sin valores). Generado por scripts/contract/snapshots.ts desde tests/fixtures/polymarket/events-ai-bubble-burst-by.json. Lo compara J4 (tests/contract).",
+  "fuente": "polymarket-gamma",
+  "esquema": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "markets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "clobTokenIds": {
+                "type": "string"
+              },
+              "closed": {
+                "type": "boolean"
+              },
+              "endDate": {
+                "type": "string"
+              },
+              "lastTradePrice": {
+                "type": "number"
+              },
+              "outcomePrices": {
+                "type": "string"
+              },
+              "outcomes": {
+                "type": "string"
+              },
+              "question": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              },
+              "volume": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "slug": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

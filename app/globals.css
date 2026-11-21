@@ -1,26 +1,265 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Variante «dark» de Tailwind ligada al atributo data-theme de <html>. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Tokens de color (sección 9). Modo oscuro por defecto.
+ * Los tokens «-tx» son la variante para TEXTO, con contraste AA ≥ 4,5:1 sobre la superficie;
+ * los tokens sin sufijo son para rellenos, iconos y líneas (≥ 3:1).
+ */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --fondo: #0b0f14;
+  --superficie: #121821;
+  --superficie-2: #18202b;
+  --borde: #1f2937;
+  --borde-fuerte: #374151;
+  --texto: #e5e7eb;
+  --texto-2: #9ca3af;
+  --verde: #22c55e;
+  --ambar: #f59e0b;
+  --naranja: #f97316;
+  --rojo: #ef4444;
+  --gris: #6b7280;
+  --azul: #3b82f6;
+  --violeta: #a855f7;
+  --verde-tx: #22c55e;
+  --ambar-tx: #f59e0b;
+  --naranja-tx: #f97316;
+  --rojo-tx: #f87171;
+  --gris-tx: #9ca3af;
+  --azul-tx: #60a5fa;
+  --violeta-tx: #c084fc;
+  --foco: #60a5fa;
+  --rejilla: #1f2937;
+  /* texto sobre un relleno semántico (azul, violeta, rojo…) */
+  --sobre-color: #0b0f14;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --fondo: #f8fafc;
+  --superficie: #ffffff;
+  --superficie-2: #f1f5f9;
+  --borde: #e2e8f0;
+  --borde-fuerte: #94a3b8;
+  --texto: #111827;
+  --texto-2: #4b5563;
+  /* Semánticos oscurecidos para contraste AA sobre blanco y #F8FAFC. */
+  --verde: #15803d;
+  --ambar: #b45309;
+  --naranja: #c2410c;
+  --rojo: #b91c1c;
+  --gris: #6b7280;
+  --azul: #1d4ed8;
+  --violeta: #7e22ce;
+  /* texto semántico aún más oscuro: se lee sobre fondos tintados (insignias, avisos) con ≥ 4,5:1 */
+  --verde-tx: #166534;
+  --ambar-tx: #92400e;
+  --naranja-tx: #9a3412;
+  --rojo-tx: #991b1b;
+  --gris-tx: #4b5563;
+  --azul-tx: #1d4ed8;
+  --violeta-tx: #6b21a8;
+  --foco: #1d4ed8;
+  --rejilla: #e2e8f0;
+  --sobre-color: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-borde: var(--borde);
+  --color-borde-fuerte: var(--borde-fuerte);
+  --color-texto: var(--texto);
+  --color-texto-2: var(--texto-2);
+  --color-verde: var(--verde);
+  --color-ambar: var(--ambar);
+  --color-naranja: var(--naranja);
+  --color-rojo: var(--rojo);
+  --color-gris: var(--gris);
+  --color-azul: var(--azul);
+  --color-violeta: var(--violeta);
+  --color-verde-tx: var(--verde-tx);
+  --color-ambar-tx: var(--ambar-tx);
+  --color-naranja-tx: var(--naranja-tx);
+  --color-rojo-tx: var(--rojo-tx);
+  --color-gris-tx: var(--gris-tx);
+  --color-azul-tx: var(--azul-tx);
+  --color-violeta-tx: var(--violeta-tx);
+  --color-foco: var(--foco);
+  --color-sobre-color: var(--sobre-color);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--fondo);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Cifras: JetBrains Mono con números tabulares. */
+.cifra {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Las anclas no quedan tapadas por la cabecera fija. */
+section[id],
+[data-ancla] {
+  scroll-margin-top: 7rem;
+}
+
+/* Foco visible y consistente (WCAG 2.4.7 / 2.4.11). */
+:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+.enlace {
+  color: var(--azul-tx);
+  text-decoration: underline;
+}
+.enlace:hover {
+  text-decoration-thickness: 2px;
+}
+
+.saltar {
+  position: absolute;
+  left: 0.5rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--superficie);
+  color: var(--texto);
+  border: 2px solid var(--foco);
+  border-radius: 6px;
+}
+.saltar:focus {
+  top: 0.5rem;
+}
+
+/* Los contenedores con desplazamiento son el bloque contenedor de sus .sr-only (si no, desbordan la página). */
+.overflow-auto,
+.overflow-x-auto {
+  position: relative;
+}
+
+/* Tablas de datos accesibles */
+.tabla {
+  width: 100%;
+  position: relative;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+.tabla th,
+.tabla td {
+  padding: 0.375rem 0.5rem;
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+  vertical-align: top;
+}
+.tabla th {
+  color: var(--texto-2);
+  font-weight: 600;
+}
+.tabla td.num,
+.tabla th.num {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Recharts: textos de los ejes en el color secundario */
+.recharts-cartesian-axis-tick-value {
+  fill: var(--texto-2);
+  font-size: 11px;
+}
+.recharts-default-tooltip {
+  background: var(--superficie) !important;
+  border-color: var(--borde-fuerte) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Vista imprimible (CU4) */
+@media print {
+  :root,
+  :root[data-theme="dark"],
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --fondo: #ffffff;
+    --superficie: #ffffff;
+    --superficie-2: #f8fafc;
+    --borde: #cbd5e1;
+    --borde-fuerte: #64748b;
+    --texto: #000000;
+    --texto-2: #334155;
+    --verde: #15803d;
+    --ambar: #b45309;
+    --naranja: #c2410c;
+    --rojo: #b91c1c;
+    --azul: #1d4ed8;
+    --violeta: #7e22ce;
+    --verde-tx: #15803d;
+    --ambar-tx: #b45309;
+    --naranja-tx: #c2410c;
+    --rojo-tx: #b91c1c;
+    --gris-tx: #4b5563;
+    --azul-tx: #1d4ed8;
+    --violeta-tx: #7e22ce;
+  }
+  .no-imprimir {
+    display: none !important;
+  }
+  header.cabecera {
+    position: static !important;
+  }
+  .tarjeta {
+    break-inside: avoid-page;
+  }
+  .tarjeta {
+    box-shadow: none !important;
+  }
+  a.enlace::after {
+    content: "";
+  }
+}
+
+/* WCAG 2.2 (2.5.8): objetivos táctiles de al menos 24 × 24 px en los enlaces sueltos. */
+a.enlace,
+header a,
+a.hover\:underline {
+  display: inline-block;
+  min-height: 24px;
+  min-width: 24px;
+  line-height: 24px;
 }

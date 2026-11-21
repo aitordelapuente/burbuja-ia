@@ -68,11 +68,13 @@ export function formatearEje(v: number, tipo: TipoFormato): string {
     case 'pctSigno':
       return `${num(v * 100, 0)} %`;
     case 'tasa':
-      return `${num(v, 1)} %`;
+      return `${num(v, 2, 1)} %`;
     case 'prob':
       return `${num(v * 100, 0)} %`;
     case 'usd':
     case 'usdh':
+      if (Math.abs(v) >= 1e6) return `${num(v / 1e6, 1, 0)} M`;
+      if (Math.abs(v) >= 1e4) return `${num(v / 1e3, 0)} mil`;
       return Math.abs(v) >= 100 ? num(v, 0) : num(v, 1, 0);
     case 'musd':
       return num(v, 0);
@@ -249,3 +251,24 @@ export const TITULO_CONDICION: Record<string, string> = {
 };
 
 export const IDS_CONDICIONES = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'] as const;
+
+/** Volumen en dólares: 4812345 → «4,8 M$». */
+export function usdVolumen(v: number): string {
+  if (v >= 1e6) return `${num(v / 1e6, 1)}${NBSP}M$`;
+  return `${num(v, 0)}${NBSP}$`;
+}
+
+/** Recorta una serie a los últimos `dias` naturales (portada: 1 año; «Máx» solo en el detalle). */
+export function recortar(serie: Punto[] | undefined, dias = 365): Punto[] {
+  if (!serie || serie.length === 0) return [];
+  const desde = Date.parse(serie[serie.length - 1].date) - dias * 86_400_000;
+  return serie.filter((p) => Date.parse(p.date) >= desde);
+}
+
+/** Rangos del selector en la portada. */
+export const RANGOS_PORTADA: Array<'3M' | '6M' | '1A'> = ['3M', '6M', '1A'];
+
+/** Serie escalonada sin pérdida: solo los puntos donde cambia el valor (y el último). */
+export function soloCambios(serie: Punto[]): Punto[] {
+  return serie.filter((p, i, a) => i === 0 || i === a.length - 1 || p.value !== a[i - 1].value);
+}

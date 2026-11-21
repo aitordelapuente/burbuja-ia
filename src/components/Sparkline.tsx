@@ -31,7 +31,14 @@ export function tramos(puntos: Punto[]): Punto[][] {
 function muestrear(puntos: Punto[], n: number): Punto[] {
   if (puntos.length <= n) return puntos;
   const k = Math.ceil(puntos.length / n);
-  return puntos.filter((_, i) => i % k === 0 || i === puntos.length - 1);
+  let iMin = 0;
+  let iMax = 0;
+  puntos.forEach((p, i) => {
+    if (p.value < puntos[iMin].value) iMin = i;
+    if (p.value > puntos[iMax].value) iMax = i;
+  });
+  // Se conservan el mínimo y el máximo para no deformar la forma de la serie.
+  return puntos.filter((_, i) => i % k === 0 || i === puntos.length - 1 || i === iMin || i === iMax);
 }
 
 /**
@@ -63,9 +70,11 @@ export function Sparkline({
   if (todos.length < 2) return null;
   const ultimaFecha = Date.parse(todos[todos.length - 1].date);
   const desde = ultimaFecha - dias * 86_400_000;
-  const serie = todos.filter((p) => Date.parse(p.date) >= desde);
-  if (serie.length < 2) return null;
-  const um = (umbral ?? []).filter((p) => Date.parse(p.date) >= desde);
+  const serieCompleta = todos.filter((p) => Date.parse(p.date) >= desde);
+  if (serieCompleta.length < 2) return null;
+  // Para dibujar basta con ~130 puntos reales (no se interpola); el umbral escalonado solo cambia en los saltos.
+  const serie = muestrear(serieCompleta, 130);
+  const um = (umbral ?? []).filter((p, i, a) => Date.parse(p.date) >= desde && (i === 0 || i === a.length - 1 || p.value !== a[i - 1].value));
 
   const valores = [...serie.map((p) => p.value), ...um.map((p) => p.value)];
   if (umbralFijo !== null && umbralFijo !== undefined) valores.push(umbralFijo);
@@ -94,17 +103,17 @@ export function Sparkline({
     pathUmbral += `L${W},${y(um[um.length - 1].value).toFixed(1)}`;
   }
 
-  const ultimo = serie[serie.length - 1];
-  const primero = serie[0];
-  const minP = serie.reduce((a, b) => (b.value < a.value ? b : a));
-  const maxP = serie.reduce((a, b) => (b.value > a.value ? b : a));
+  const ultimo = serieCompleta[serieCompleta.length - 1];
+  const primero = serieCompleta[0];
+  const minP = serieCompleta.reduce((a, b) => (b.value < a.value ? b : a));
+  const maxP = serieCompleta.reduce((a, b) => (b.value > a.value ? b : a));
   const resumen =
     `${titulo}: del ${fecha(primero.date)} (${formatear(primero.value, formato)}) al ${fecha(ultimo.date)} (${formatear(ultimo.value, formato)}). ` +
     `Máximo ${formatear(maxP.value, formato)} el ${fecha(maxP.date)}; mínimo ${formatear(minP.value, formato)} el ${fecha(minP.date)}.` +
     (um.length ? ` Umbral actual ${formatear(um[um.length - 1].value, formato)}.` : '') +
     (umbralFijo !== null && umbralFijo !== undefined ? ` Umbral ${formatear(umbralFijo, formato)}.` : '');
 
-  const filasTabla = muestrear(serie, 60)
+  const filasTabla = muestrear(serieCompleta, 53)
     .slice()
     .reverse()
     .map((p) => [fecha(p.date), formatear(p.value, formato)]);

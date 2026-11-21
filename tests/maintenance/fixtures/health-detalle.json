@@ -1,0 +1,32 @@
+{
+ "_fixture": "FIXTURE SINTÉTICO de prueba: no es una respuesta real",
+ "filas": [
+  {
+   "id": "cierres",
+   "fuente": "Yahoo",
+   "ultimoPunto": "2026-11-20",
+   "edadHoras": 20,
+   "umbralStaleH": 48,
+   "umbralSinDatoH": 120,
+   "estado": "ok"
+  },
+  {
+   "id": "I24",
+   "fuente": "Silicon Data",
+   "ultimoPunto": "2026-11-10",
+   "edadHoras": 260,
+   "umbralStaleH": 72,
+   "umbralSinDatoH": 168,
+   "estado": "stale"
+  },
+  {
+   "id": "I30",
+   "fuente": "FRED DGS10",
+   "ultimoPunto": "2026-11-19",
+   "edadHoras": 50,
+   "umbralStaleH": 72,
+   "umbralSinDatoH": 168,
+   "estado": "ok"
+  }
+ ]
+}

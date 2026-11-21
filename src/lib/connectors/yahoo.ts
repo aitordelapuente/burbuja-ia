@@ -11,8 +11,15 @@ export interface SerieYahoo {
   points: Array<{ date: string; close: number }>;
 }
 
-const fechaEnZona = (ts: number, zona: string) =>
-  new Intl.DateTimeFormat('en-CA', { timeZone: zona, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(ts * 1000));
+const formateadores = new Map<string, Intl.DateTimeFormat>();
+const fechaEnZona = (ts: number, zona: string) => {
+  let f = formateadores.get(zona);
+  if (!f) {
+    f = new Intl.DateTimeFormat('en-CA', { timeZone: zona, year: 'numeric', month: '2-digit', day: '2-digit' });
+    formateadores.set(zona, f);
+  }
+  return f.format(new Date(ts * 1000));
+};
 
 /** Convierte la respuesta cruda de Yahoo en puntos {date, close}, descartando close nulo. */
 export function parsearYahoo(raw: unknown): SerieYahoo {
