@@ -8,7 +8,7 @@ La especificación completa está en [`ESPECIFICACION.md`](ESPECIFICACION.md) y 
 
 ## Puesta en marcha
 
-Requisitos: Node 20 o superior y pnpm 10.
+Requisitos: Node 22 o superior y pnpm 10.
 
 ```bash
 pnpm install
