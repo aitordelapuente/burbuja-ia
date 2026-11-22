@@ -1,5 +1,5 @@
 // Crea o actualiza las etiquetas del repositorio que usan los jobs (sección 17, paso 20). Idempotente.
-// Uso: GITHUB_TOKEN=… GITHUB_REPOSITORY=propietario/panel-pinchazo-ia pnpm tsx scripts/setup/labels.ts
+// Uso: GITHUB_TOKEN=… GITHUB_REPOSITORY=aitordelapuente/burbuja-ia pnpm tsx scripts/setup/labels.ts
 import { pathToFileURL } from 'node:url';
 import { clienteDesdeEntorno, type ClienteGitHub } from '../lib/github';
 

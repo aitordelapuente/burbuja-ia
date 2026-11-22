@@ -47,7 +47,7 @@ SITE_URL=https://… HEALTH_TOKEN=… pnpm tsx scripts/monitor/run.ts
 pnpm vitest run --config vitest.contract.config.mts && pnpm tsx scripts/contract/report.ts
 pnpm tsx scripts/contract/snapshots.ts            # regenera los snapshots desde los fixtures
 pnpm tsx scripts/contract/snapshots.ts --vivo     # o desde las respuestas reales (necesita red)
-GITHUB_TOKEN=… GITHUB_REPOSITORY=propietario/panel-pinchazo-ia pnpm tsx scripts/setup/labels.ts
+GITHUB_TOKEN=… GITHUB_REPOSITORY=aitordelapuente/burbuja-ia pnpm tsx scripts/setup/labels.ts
 ```
 
 ### Pausar y reanudar
@@ -97,7 +97,7 @@ Con un proveedor sin búsqueda web, la tarea `opv` y la parte de OpenAI de `fina
 
 1. `pnpm tsx scripts/setup/labels.ts` crea `automerge`, `revision-humana`, `monitor`, `contrato`, `autofix` y `suceso`.
 2. Settings → General → *Allow auto-merge* activado.
-3. Protección de `main`: check obligatorio `ci`, PR obligatorio y *Require review from Code Owners*. Sustituye `@PROPIETARIO` en `.github/CODEOWNERS`.
+3. Protección de `main`: check obligatorio `ci`, PR obligatorio y *Require review from Code Owners*. `.github/CODEOWNERS` ya apunta a `@aitordelapuente`.
 4. Settings → Actions → *Workflow permissions*: lectura por defecto (cada workflow declara sus permisos) y *Allow GitHub Actions to create and approve pull requests* activado solo para **crear** PR (ningún job aprueba).
 5. Instala la GitHub App de Renovate.
 

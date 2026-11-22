@@ -53,7 +53,7 @@ Regla de oro: un dato con `verificado: false` se muestra con la insignia «Dato 
 
 ## Despliegue en Vercel
 
-1. Crea el repositorio `panel-pinchazo-ia` en GitHub y sube este código.
+1. El código está en el repositorio [`aitordelapuente/burbuja-ia`](https://github.com/aitordelapuente/burbuja-ia).
 2. En Vercel, **Add New → Project**, importa el repositorio (framework Next.js, sin cambios de build).
 3. Variables de entorno: `SEC_USER_AGENT` (con un correo real), `CRON_SECRET`, `HEALTH_TOKEN` (genera ambos con `openssl rand -hex 32`) y, opcionalmente, `SILICONDATA_API_KEY`, `FRED_API_KEY`, `NEXT_PUBLIC_SITE_URL`.
 4. Despliega. `vercel.json` configura Vercel Cron contra `/api/cron/refresh`. **Si tu plan es Hobby** (un solo cron diario), deja solo la entrada `30 21 * * 1-5`: la ISR de 900 s cubre el resto.

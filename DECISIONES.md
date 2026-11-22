@@ -39,5 +39,6 @@ Decisiones tomadas durante la construcción donde la especificación (v1.1) no d
 27. **IAA:** se cuentan proveedores, no lecturas (RunPod solo, con sus dos precios, es una fuente → sin dato). IAA_hs exige Azure y AWS.
 28. **Eventos de Polymarket descubiertos** se guardan en `data/auto/polymarket_eventos.json` (no en `config.ts`) y la app los une a `POLYMARKET.eventos`.
 29. **Nvidia:** si conviven la semilla del vídeo y un dato de J2 del mismo trimestre, prevalece el verificado; si XBRL publica ese trimestre, manda XBRL y se avisa si difiere más de un 1 % (`I13.extra.avisoXbrl`).
-30. **CODEOWNERS** protege también `laboratorios.json`, `candidatos_c56.json`, `.github/`, `renovate.json` y los clasificadores de los jobs. Hay que sustituir `@PROPIETARIO` por la cuenta real.
+30. **CODEOWNERS** protege también `laboratorios.json`, `candidatos_c56.json`, `.github/`, `renovate.json` y los clasificadores de los jobs. Apunta a `@aitordelapuente`.
 31. **Sin IA con búsqueda web**, el investigador solo extrae de documentos que descarga el código; `opv` y la financiación de OpenAI no producen datos en ese modo.
+32. **Nombre del repositorio:** el propietario lo creó como `aitordelapuente/burbuja-ia` en lugar del `panel-pinchazo-ia` de D15. El paquete conserva el nombre `panel-pinchazo-ia`.
